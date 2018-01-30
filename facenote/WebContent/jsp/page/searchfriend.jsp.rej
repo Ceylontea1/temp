@@ -1,0 +1,9 @@
+diff a/facenote/WebContent/jsp/page/searchfriend.jsp b/facenote/WebContent/jsp/page/searchfriend.jsp	(rejected hunks)
+@@ -25,7 +25,6 @@
+ </script>
+ </head>
+ <body>
+-<%@ include file = "../main/header.jsp" %>
+ <%@ include file = "/WEB-INF/Friend/RequestFriend.jsp" %>
+ <div class="container">
+ <c:set var="user" value="${user}"/><!-- USERID -->
