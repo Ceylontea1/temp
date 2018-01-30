@@ -20,17 +20,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-
-<%@ include file = "../main/header.jsp" %>
-	
-<div class="container">
+<%@ include file = "/WEB-INF/Friend/RequestFriend.jsp" %>
+	<div class="container">
 <c:if test="${friendcount==0}">
-	<table border="1" class="table table-hover">
-		<tr><td>친구목록</td></tr>
+	<table class="table table-hover">
+		<tr><td colspan="3">친구목록</td></tr>
 		<tr><td>프로필사진</td><td>친구이름</td><td>친구 끊기</td></tr>
 	<form action="${pageContext.request.contextPath}/friend/firendreqinit.do">
-		<tr><td>친구가  없습니다.</td></tr>
-		<tr><td><input type="submit" value="확인"/></td></tr>
+		<tr><td colspan="3">친구가  없습니다.</td></tr>
+		<tr><td colspan="3"><button type="button" class="btn btn-primary" onclick="document.location.href='${pageContext.request.contextPath}/mypage.do'">
+	<span class="glyphicon glyphicon-ok"aria-hidden="true">확인</span></button></tr>
 	</form>
 	</table>
 </c:if>
@@ -39,18 +38,23 @@
 <c:if test="${friendcount>0}">
 
 	<table  class="table table-hover">
-		<tr><td>프로필사진</td><td>친구이름</td><td>친구 끊기</td></tr>
+		<tr><td colspan="3">친구목록</td></tr>
+		<tr><td>프로필사진</td><td>친구이름</a></td><td>친구 끊기</td></tr>
+	
 	<c:forEach var="list" items="${FreindList}">
 		<c:set var="ID" value="${list.email}"/>
 	<form action="${pageContext.request.contextPath}/friend/deletefriend.do">
 	<input type="hidden" name="friendID" value="${ID}"/>
-	<tr><td><img src="${list.imagepath}" width="100" height="100"/></td><td><a href="#">${list.name}</a></td>
-	<td><input type="submit" value="친구 끊기"/></td></tr>
+	<tr><td><img src="${list.imagepath}" width="100" height="100"/></td><td><a href="${pageContext.request.contextPath}/friendpage.do?friendmail=${list.email}">${list.name}</a></td>
+	<td><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>친구 끊기</button></td></tr>
 	</form>
 	</c:forEach>
+	<%-- <form action="${pageContext.request.contextPath}/friend/firendreqinit.do">
+	<tr><td colspan="3"><input type="submit" value="확인"/></td></tr>
+	</form> --%>
 	<tr><td colspan="3">
-	<input type="button" onclick="document.location.href='${pageContext.request.contextPath}/mypage.do'"
-			 value="확인"/></td></tr>
+	<button type="button" class="btn btn-primary" onclick="document.location.href='${pageContext.request.contextPath}/mypage.do'">
+	<span class="glyphicon glyphicon-home"aria-hidden="true"></span>확인</button></td></tr>
 
 	</table>
 </c:if>

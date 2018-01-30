@@ -25,19 +25,41 @@ function myFunction(){
 </script>
 </head>
 <body>
-<%@ include file = "../main/header.jsp" %>
-
+<%@ include file = "/WEB-INF/Friend/RequestFriend.jsp" %>
+<div class="container">
 <c:set var="user" value="${user}"/><!-- USERID -->
-<form action="${pageContext.request.contextPath}/friend/searchfriend.do" id="search" >
-<input type="hidden" value="${user}" name="userID">
-이름으로 친구찾기 <input type="text" name="namesearch" value="" placeholder="친구의 이메일을 적어주세요">
-<input type ="button" value="검색"  onclick="myFunction()"><br>
-전화번호로 친구찾기  <input type="text" name="phonesearch" value="" placeholder="친구의 이메일을 적어주세요">
-<input type ="button" value="검색" onclick="myFunction()"><br>
-아이디로 친구찾기<input type="text" name="idsearch" value="" placeholder="친구의 이메일을 적어주세요">
-<input type ="button" value="검색" onclick="myFunction()"><br>
+<table class="table table-hover">
+<form class="form-inline" action="${pageContext.request.contextPath}/friend/searchfriend.do" id="search" >
+<tr><td>
+	
+	<input type="hidden" value="${user}" name="userID">
+		<div class="form-group">
+		<label for="name">이름으로 친구찾기 </label> <input type="text" class="form-control"  name="namesearch" value="" placeholder="친구의 이름를 적어주세요">
+		<div class="pull-right">	
+			<button type="button" class="btn btn-primary"onclick="myFunction()"><span class="glyphicon glyphicon-search">검색</span></button></div><br>
+		</div>
+</td></tr>
+<tr><td>
+	<div class="form-group">
+	<label for="phone">전화번호로 친구찾기 </label> <input type="text" class="form-control" name="phonesearch" value="" placeholder="친구의 전화번호를 적어주세요">
+			<div class="pull-right">
+				<button type="button" class="btn btn-primary"onclick="myFunction()"><span class="glyphicon glyphicon-search">검색</span> </button><br>
+			</div>
+	</div>	
+</td></tr>
+<tr><td>
+	<div class="form-group">
+				<label for="id">아이디로 친구찾기</label> <input	type="text" class="form-control"  name="idsearch" value="" placeholder="친구의 아이디를 적어주세요">
+		<div class="pull-right">			
+				<button type="button" class="btn btn-primary"onclick="myFunction()"><span class="glyphicon glyphicon-search">검색</span> </button><br>
+		</div>
+	</div>
+	
+</td></tr>
+</table>
 </form>
-<table border="1">
+	
+	<table class="table table-hover">
 	
 	<tr>
 		<td>친구사진</td><td>이름</td><td>아이디</td><td>친구요청</td>
@@ -65,9 +87,10 @@ function myFunction(){
    
     </c:if>
     <form>	
- <tr><td colspan="4"><input type="button" value="확인" onClick="document.location.href='${pageContext.request.contextPath}/mypage.do'"></td></tr>
-	</form>
-</table>
+	 <tr><td colspan="4"><button type="button" class="btn btn-primary" onClick="document.location.href='${pageContext.request.contextPath}/mypage.do'">
+					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>확인</button></td></tr>
 	
+</table>
+</div>	
 </body>
 </html>

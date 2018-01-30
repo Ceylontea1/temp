@@ -176,9 +176,9 @@ public class AlarmDao {
 		if(num.equals("3")) {
 			System.out.println("BirthdatAlarm  loginEamil"+ loginEamil);
 			FRBDid=friendBirthdayCheck(loginEamil);
-			if(FRBDid[0]==null)return;
+			try {
 			if(FRBDid[0]!=null) {
-				try {
+			
 					conn=ConUtil.getConnection();
 
 					for(int i=0; i<FRBDid.length;i++) {
@@ -217,7 +217,7 @@ public class AlarmDao {
 							pstmt.executeUpdate();
 						}
 					}
-				} catch (SQLException e) {
+				}} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}		
@@ -239,7 +239,7 @@ public class AlarmDao {
 				}
 			}	
 		}
-	}
+	
 	//친구요청알람
 	public void insertFriendAlarm(String num,String AlarmId,String loginEamil) {
 		int count=0;

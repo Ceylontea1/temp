@@ -112,26 +112,28 @@
 			<input type = "hidden" name = "href" value = "${ href }">
 			
 		</form>
-
-<%-- 				<form action="${href}" method = "post"> --%>
+		<form action="${href}" method = "post" target = "_parent" onsubmit = "changeWindow();">
 					<tr>
 						<td><img src="${list.frimg}" width="100" height="100"></td>
 						<td><a href="#">${list.name}</a></td>
 						<td>${content}</td>
 						<td><%-- <input type="submit" value="${buttonNM}"> --%>
-						<button type="button" class="btn btn-primary" onClick="changeWindow();">
+						<button type="submit" class="btn btn-primary">
 					<span class="${buttonimg}" aria-hidden="true"></span>${buttonNM}</button>
 						<%-- <input type="button" value="" onclick ="changeWindow();"> --%>
 						<input type="hidden" name="${hiddenNM}" value="${list.friendemail}" />
 						<input type="hidden" name="count" value="${hidden}" /></td>
 					</tr>
-<!-- 				</form> -->
+		</form>
 			</c:forEach>
 			<tr>
 				
-					<td><button type="button" class="btn btn-primary" onClick="closeWindow();">
-					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>홈</button></td>
-			
+					<td colspan="3">
+					<div class="center-block"><button type="button" class="btn btn-primary" onClick="closeWindow();">
+					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>홈</button>
+					</div>
+					</td>
+					
 			</tr>
 
 		</table>
