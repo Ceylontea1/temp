@@ -16,6 +16,7 @@
 </head>
 <body>
 <%@ include file = "../main/header.jsp" %>
+<div class="container">
 <table>
 	<tr>
 		<td rowspan = "2">
@@ -40,6 +41,6 @@
 	<iframe src = "friendpagecontent.do?friendmail=${ friend.email }" width = "80%" height = "500" frameborder = "0">
 	
 	</iframe>
-
+</div>
 </body>
 </html>

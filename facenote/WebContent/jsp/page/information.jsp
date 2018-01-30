@@ -8,6 +8,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
 	function checkPassword() {
 
@@ -48,93 +55,128 @@
 </head>
 <body>
 <%@ include file = "../main/header.jsp" %>
+<div class="container">
 <form name = "informationForm" action = "edit.do" method = "post" onsubmit = "return checkPassword();">
+ 	
 	<input type = "hidden" name = "DBPassword" value = ${ loginUser.password }>
 	<input type = "hidden" name = "profileImagePath" value = ${ loginUser.imagepath }>
-	<table>
+	<table  class="table table-hover">
 		<tr>
 			<td rowspan = "2">
-				프로필 사진
+			<label>	프로필 사진</label>
 			</td>
 			<td>
 				<img src = "${ loginUser.imagepath }" width = "150" height = "150">
 			</td>
 		</tr>
 		<tr>
+			
 			<td>
 				<a href = "#" onclick = "changeProfileImage();">변경하기</a>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				EMAIL
+				<label>	EMAIL</label>
 			</td>
 			<td>
-				${ loginUser.email }
+				<label>	${ loginUser.email }</label>
 			</td>
 		</tr>
 		<tr>
-			<td colspan = "2">
-				비밀번호 변경
+			<td></td>
+			<td>
+			<label>	비밀번호 변경</label>
 			</td>
+		</tr>
+		
+		<tr>	
+			<td>
+			
+				<label for="exampleInputPassword1">새 비밀번호</label>
+			</td>
+			<td>
+			<div class="form-group">
+				<input type = "password" name ="newPassword" class="form-control"  placeholder = "비밀번호 변경을 원하시면 입력해주세요.">
+			</div>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+			
+				<label>비밀번호 확인</label>
+			</td>
+			<td>
+			<div class="form-group">
+				<input type = "password" name = "newPasswordConfirm"class="form-control" placeholder = "비밀번호 변경을 원하시면 입력해주세요.">
+			</div>
+			</td>
+			
 		</tr>
 		<tr>
 			<td>
-				새 비밀번호
+			<label>생일</label>
 			</td>
 			<td>
-				<input type = "password" name = "newPassword" placeholder = "비밀번호 변경을 원하시면 입력해주세요.">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				비밀번호 확인
-			</td>
-			<td>
-				<input type = "password" name = "newPasswordConfirm" placeholder = "비밀번호 변경을 원하시면 입력해주세요.">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				생일
-			</td>
-			<td>
-				${ loginUser.birth }
-			</td>
-		</tr>
-		<tr>
-			<td>
-				전화번호
-			</td>
-			<td>
-				<input type = "text" name = "phone0" value = "${ phoneSplit[0] }" maxlength = "3" size = "3">-
-				<input type = "text" name = "phone1" value = "${ phoneSplit[1] }" maxlength = "4" size = "4">-
-				<input type = "text" name = "phone2" value = "${ phoneSplit[2] }" maxlength = "4" size = "4">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				가입일
-			</td>
-			<td>
-				${ loginUser.regdate }
+			<label>${ loginUser.birth }</label>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				비밀번호 입력
+			 <label>전화번호</label>
 			</td>
 			<td>
-				<input type = "password" name = "formPassword" required>
+			
+		  <div class="col-xs-7">
+			  <div class="form-group phone-number">
+			    <div class="col-xs-3">
+			 		<input type = "text" name = "phone0" value = "${ phoneSplit[0] }" class="form-control"  type="tel" maxlength = "3" size = "3">
+				   </div>
+				   <div class="col-xs-1">
+						<label>-</label>
+				   </div>	
+				 <div class="col-xs-3">
+					<input type = "text" name = "phone1" value = "${ phoneSplit[1] }" class="form-control"  type="tel" maxlength = "4" size = "4">
+				 </div>
+				     <div class="col-xs-1">
+						<label>-</label>
+				   </div>
+				 <div class="col-xs-4">
+					<input type = "text" name = "phone2" value = "${ phoneSplit[2] }" class="form-control" type="tel" maxlength = "4" size = "4">
+			     </div>
+				</div>
+			  </div>	
 			</td>
 		</tr>
 		<tr>
-			<td colspan = "2" align = "right">
-				<input type = "submit" value = "확인">
+			<td>
+			   <label>가입일</label>
+			</td>
+			<td>
+				<label>${ loginUser.regdate }</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<label>비밀번호 입력</label>
+			</td>
+			<td>
+				<div class="form-group">
+					<input type = "password" name = "formPassword" class="form-control" placeholder = "현재 비밀번호 입력해주세요." required>
+				</div>			
+			</td>
+		</tr>
+		<tr>
+			<td colspan = "2" align = "center">
+			<button type="submit" class="btn btn-primary">
+					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>확인</button>
 			</td>
 		</tr>
 	</table>
+
 </form>
+</div>
 
 </body>
 </html>

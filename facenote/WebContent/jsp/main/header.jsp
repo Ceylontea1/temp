@@ -7,14 +7,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>친구요청 버튼</title>
-<!-- 합쳐지고 최소화된 최신 CSS -->
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-<!-- 부가적인 테마 -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.css">
 <link rel="stylesheet"
@@ -66,7 +65,7 @@
 				</div>
 				<div class="col-md-5">
 					<div class="pull-right" id="upform">
-						<button type="button" class="btn btn-primary"
+						<button type="button" class="btn btn-primary "
 							onClick="document.location.href='${pageContext.request.contextPath}/mypage.do'">
 							<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 							홈

@@ -139,7 +139,7 @@ public class AlarmDao {
 		List<UsersDto> list=Fdao.showFRlist(loginEamil);
 		System.out.println("FriendBirthdayCheck  list"+list);
 		if(list==null)return null;
-		String[] BirthdayFriend=new String[list.size()];	
+		String[] BirthdayFriend= new String[list.size()];	
 		System.out.println("FriendBirthdayCheck  listsize"+list.size());
 
 		int count=0;
@@ -151,7 +151,9 @@ public class AlarmDao {
 				count++;
 			}
 		}
-		
+		if(BirthdayFriend.length==0) {
+			BirthdayFriend=null;
+		}
 
 		return BirthdayFriend;
 	}
@@ -176,8 +178,8 @@ public class AlarmDao {
 		if(num.equals("3")) {
 			System.out.println("BirthdatAlarm  loginEamil"+ loginEamil);
 			FRBDid=friendBirthdayCheck(loginEamil);
-			try {
-			if(FRBDid[0]!=null) {
+			try {System.out.println(FRBDid);
+			if(FRBDid!=null) {
 			
 					conn=ConUtil.getConnection();
 
@@ -220,7 +222,9 @@ public class AlarmDao {
 				}} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}		
+				}catch(NullPointerException e) {
+					System.out.println("친구중에 생일이신분없음!");	
+				}
 				finally {
 					try {
 						if(rs != null) {

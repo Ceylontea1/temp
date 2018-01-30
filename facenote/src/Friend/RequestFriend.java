@@ -38,7 +38,7 @@ public class RequestFriend implements CommandAction{
 		req.setAttribute("idsearch",friendID);
 		req.setAttribute("result", result);
 		//result 가 2이면 성공적 , result=0이면  잘못됨 이미 요청한 친구 <result 값은 0과 2만 나오도록 한다.>
-		return "/jsp/page/requestfriendproc.jsp";
+		return "/jsp/page/requestfriendpro.jsp";
 	}
 
 }

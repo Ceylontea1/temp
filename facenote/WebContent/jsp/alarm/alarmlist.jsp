@@ -52,7 +52,7 @@
 				</tr>
 				<tr>
 				
-					<td><button type="button" class="btn btn-primary" onClick=" closeWindow();">
+					<td colspan="3" align="center"><button type="button" class="btn btn-primary" onClick=" closeWindow();">
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>홈</button></td>
 				
 				</tr>
@@ -128,7 +128,7 @@
 			</c:forEach>
 			<tr>
 				
-					<td colspan="3">
+					<td colspan="3" align="center">
 					<div class="center-block"><button type="button" class="btn btn-primary" onClick="closeWindow();">
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>홈</button>
 					</div>

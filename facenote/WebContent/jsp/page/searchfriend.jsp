@@ -79,16 +79,17 @@ function myFunction(){
     <tr>
     <td><input type="hidden" value="${list.email}"name="friendID"/>
      <img src= "${list.imagepath}" width="150"height="150"> </td>
-     <td><a href="#">${list.name}</a></td><td>${list.email}</td>
-     <td><input type="submit" value="친구신청" ></td>
+     <td><a href="${pageContext.request.contextPath}/friendpage.do?friendmail=${list.email}">${list.name}</a></td><td><label>${list.email}</label></td>
+     <td><button type="submit" class="btn btn-primary">
+					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>친구신청</button></td>
     </tr>
  	</form>
     </c:forEach>
    
     </c:if>
     <form>	
-	 <tr><td colspan="4"><button type="button" class="btn btn-primary" onClick="document.location.href='${pageContext.request.contextPath}/mypage.do'">
-					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>확인</button></td></tr>
+	 <tr><td colspan="4" align="center"><button type="button" class="btn btn-primary" onClick="document.location.href='${pageContext.request.contextPath}/mypage.do'">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>확인</button></td></tr>
 	
 </table>
 </div>	

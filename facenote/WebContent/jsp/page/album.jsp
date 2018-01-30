@@ -12,6 +12,7 @@
 </head>
 <body>
 <%@ include file = "../main/header.jsp" %>
+<div class="container">
 <table>
 	<c:choose>
 		<c:when test = "${ albumAccount.email eq loginUser.email }">
@@ -65,6 +66,6 @@
 	<iframe src = "albumcontent.do?email=${ albumAccount.email }" width = "80%" height = "500" frameborder = "0">
 	
 	</iframe>
-
+</div>
 </body>
 </html>

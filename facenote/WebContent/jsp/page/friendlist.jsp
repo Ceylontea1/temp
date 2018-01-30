@@ -28,7 +28,7 @@
 		<tr><td>프로필사진</td><td>친구이름</td><td>친구 끊기</td></tr>
 	<form action="${pageContext.request.contextPath}/friend/firendreqinit.do">
 		<tr><td colspan="3">친구가  없습니다.</td></tr>
-		<tr><td colspan="3"><button type="button" class="btn btn-primary" onclick="document.location.href='${pageContext.request.contextPath}/mypage.do'">
+		<tr><td colspan="3" align="center"><button type="button" class="btn btn-primary" onclick="document.location.href='${pageContext.request.contextPath}/mypage.do'">
 	<span class="glyphicon glyphicon-ok"aria-hidden="true">확인</span></button></tr>
 	</form>
 	</table>
@@ -52,7 +52,7 @@
 	<%-- <form action="${pageContext.request.contextPath}/friend/firendreqinit.do">
 	<tr><td colspan="3"><input type="submit" value="확인"/></td></tr>
 	</form> --%>
-	<tr><td colspan="3">
+	<tr><td colspan="3" align="center">
 	<button type="button" class="btn btn-primary" onclick="document.location.href='${pageContext.request.contextPath}/mypage.do'">
 	<span class="glyphicon glyphicon-home"aria-hidden="true"></span>확인</button></td></tr>
 
