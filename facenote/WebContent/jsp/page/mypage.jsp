@@ -14,7 +14,7 @@
 
 </head>
 <body>
-<%@ include file = "/WEB-INF/Friend/RequestFriend.jsp" %>
+<%@ include file = "../main/header.jsp" %>
 
 	<div class="container">
 

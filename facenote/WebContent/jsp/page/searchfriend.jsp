@@ -26,7 +26,6 @@ function myFunction(){
 </head>
 <body>
 <%@ include file = "../main/header.jsp" %>
-<%@ include file = "/WEB-INF/Friend/RequestFriend.jsp" %>
 <div class="container">
 <c:set var="user" value="${user}"/><!-- USERID -->
 <table class="table table-hover">

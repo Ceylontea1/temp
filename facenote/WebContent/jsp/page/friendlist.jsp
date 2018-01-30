@@ -20,7 +20,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<%@ include file = "/WEB-INF/Friend/RequestFriend.jsp" %>
+<%@ include file = "../main/header.jsp" %>
 	<div class="container">
 <c:if test="${friendcount==0}">
 	<table class="table table-hover">

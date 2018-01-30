@@ -29,7 +29,7 @@
 	var opener;
 	function openAlarm() {
 		opener = window.open(
-				'${pageContext.request.contextPath}/Alarm/getALlist.do',
+				'${pageContext.request.contextPath}/alarm/getALlist.do',
 				'alarm', 'width=800,height=300,menubar=no');
 	}
 </script>
