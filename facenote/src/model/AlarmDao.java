@@ -184,7 +184,7 @@ public class AlarmDao {
 					conn=ConUtil.getConnection();
 
 					for(int i=0; i<FRBDid.length;i++) {
-						Udto=Udao.getUserInfo(FRBDid[i]); 
+						Udto=Udao.getUser(FRBDid[i]); 
 						sql="select REGDATE from ALARM where EMAIL=? and CONTENT=? and FRIENDEMAIL=?";
 						pstmt=conn.prepareStatement(sql);
 						pstmt.setString(1, loginEamil);
@@ -271,7 +271,7 @@ public class AlarmDao {
 				pstmt=conn.prepareStatement(sql);
 				pstmt.setString(1,AlarmId);
 				pstmt.setString(2,loginEamil);
-				UsersDto dto=Udao.getUserInfo(loginEamil);
+				UsersDto dto=Udao.getUser(loginEamil);
 				pstmt.setString(3,dto.getName());
 				pstmt.setString(4, num);
 				pstmt.setString(5,curtuntTime());
@@ -395,7 +395,7 @@ public class AlarmDao {
 		FriendDao dao=FriendDao.getInstance();
 		List<UsersDto> frlist=dao.showFRlist(loginEamil);
 		UsersDao Udao=UsersDao.getInstance();
-		UsersDto dto=Udao.getUserInfo(loginEamil);//접속사 유저
+		UsersDto dto=Udao.getUser(loginEamil);//접속사 유저
 	
 		for(UsersDto tmpdtp: frlist) {
 			

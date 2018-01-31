@@ -5,9 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -61,11 +64,11 @@ public class UsersDao {
 					user.setGender(rs.getString("GENDER"));
 					user.setBirth(rs.getString("BIRTH"));
 					user.setPhone(rs.getString("PHONE"));
-					if(!rs.getString("IMAGEPATH").equals("null")) {
+					if(this.isExists(rs.getString("IMAGEPATH"))) {
 						user.setimagepath(rs.getString("IMAGEPATH"));
 					}
 					else {
-						user.setimagepath("/img/noneProfileIMG/noneIMG.png");
+						user.setimagepath("/img/profileIMG/noneProfile.png");
 					}
 					user.setRegdate(rs.getString("REGDATE"));
 			}
@@ -110,60 +113,15 @@ public class UsersDao {
 		
 		return user;
 	}
-		 
-	public UsersDto getUserInfo(String USERID) {
-		Connection conn=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
 	
-		 UsersDto ConnectUser=new UsersDto(); 
-		try {
-			conn=ConUtil.getConnection();
-			pstmt=conn.prepareStatement("select * from USERS where EMAIL=(?)");
-			//사용자 아이디가 cap911218일경우를 생각함
-			pstmt.setString(1, USERID);
-			rs=pstmt.executeQuery();	
-			
-			if(rs.next()) {
-				
-				 ConnectUser.setEmail(rs.getString("EMAIL"));
-				 ConnectUser.setName(rs.getString("NAME"));
-				 ConnectUser.setAge(rs.getInt("AGE"));
-				 ConnectUser.setGender(rs.getString("GENDER"));
-				 ConnectUser.setBirth(rs.getString("BIRTH"));
-				 ConnectUser.setPhone(rs.getString("PHONE"));
-				 ConnectUser.setimagepath(rs.getString("IMAGEPATH"));
-				 ConnectUser.setRegdate(rs.getString("REGDATE"));
-				
-			 }
-		}catch(Exception e) {e.printStackTrace();}
+	public boolean isExists(String imagePath) {
+		boolean isExists = true;
 		
-		if(rs!=null)
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		if(pstmt!=null)
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		if(conn!=null)
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		System.out.println(
-				"getUserInfo()함수 에서 Userdto user EMAIL"+ConnectUser.getEmail());
-		System.out.println(
-				"getUserInfo()함수 에서 Userdto user NAME"+ConnectUser.getName());
-		 return  ConnectUser;
+		File file = new File(imagePath);
+		
+		isExists = file.exists();
+		
+		return isExists;
 	}
 	
 	public List<String> getUsers(List<ContentsDto> content) {
@@ -287,4 +245,118 @@ public class UsersDao {
 		}
 	}
 	
+	public int login(String userEmail, String userPassword) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from USERS where EMAIL = ?";
+		try {
+			conn = ConUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userEmail);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getString("PASSWORD").equals(userPassword)) {
+					return 1;	// 로그인 성공
+				}
+					return 2;	// 비밀번호 틀림
+			} else {
+					return 0;	// 해당 사용자가 존재하지 않음
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.closeConnection(conn, pstmt, rs);
+		}
+		return -1;	// 데이터 베이스 오류
+	}
+	
+	public int registerCheck(String userEmail) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from USERS where EMAIL = ?";
+		try {
+			conn = ConUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userEmail);
+			rs = pstmt.executeQuery();
+			if(rs.next() || userEmail.equals("")) {
+				System.out.println("dao registerCheck 가입 불가능한 이메일");
+				return 0;	// 이미 존재하는 회원
+			} else {
+				System.out.println("dao registerCheck 가입 가능한 회원 이메일");
+				return 1;	// 가입 가능한 회원 이메일
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.closeConnection(conn, pstmt, rs);
+		}
+		return -1;	// 데이터 베이스 오류
+	}
+	
+	public int register(String userEmail, String userPassword, String userName, String userBirth, String userPhone, String userGender, String userProfile) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		if(registerCheck(userEmail) == 1) {
+			String sql = "insert into USERS(EMAIL, PASSWORD, NAME, AGE, GENDER, BIRTH, PHONE, IMAGEPATH, REGDATE) "
+					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			try {
+				conn = ConUtil.getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userEmail);
+				pstmt.setString(2, userPassword);
+				pstmt.setString(3, userName);
+				pstmt.setInt(4, this.getAge(userBirth));
+				pstmt.setString(5, userGender);
+				pstmt.setString(6, userBirth);
+				pstmt.setString(7, userPhone);
+				pstmt.setString(8, this.getImagePath(userEmail));
+				pstmt.setString(9, this.getDate());
+				return pstmt.executeUpdate();
+			
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				this.closeConnection(conn, pstmt, rs);
+			}
+		}
+		return -1;	// 데이터베이스 오류
+	}
+	
+	public String getImagePath(String email) {
+		System.out.println(email);
+		String[] emailSplit = email.split("@");
+		String dirPath = "/img/profileIMG/";
+		String imagePath = dirPath + emailSplit[0] + "_" + emailSplit[1];
+		
+		return imagePath;
+	}
+	
+	public int getAge(String birth) {
+		int age = 0;
+		
+		String time="";
+		SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.KOREA);
+		Date currentTime=new Date();
+		time=formatter.format(currentTime);
+		
+		String[] nowYear = time.split("-");
+		String[] birthYear = birth.split("-");
+		
+		age = Integer.parseInt(nowYear[0]) - Integer.parseInt(birthYear[0]);
+		
+		return age;
+	}
+
+	public String getDate() {
+		String time="";
+		SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd",Locale.KOREA);
+		Date currentTime=new Date();
+		time=formatter.format(currentTime);
+		
+		return time;
+	}
 }

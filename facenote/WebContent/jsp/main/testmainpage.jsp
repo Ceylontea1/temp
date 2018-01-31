@@ -7,11 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file = "../main/header.jsp" %>
 
-<form action = "mypage.do" method = "post">
-	<input type = "text" name = "email" value = "">
-	<input type = "submit" value = "test">
-</form>
-
+<a href = "${pageContext.request.contextPath}/jsp/main/login.jsp">login</a>
+<a href = "${pageContext.request.contextPath}/jsp/main/join.jsp">create</a>
 </body>
 </html>

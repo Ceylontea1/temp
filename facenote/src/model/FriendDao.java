@@ -77,7 +77,7 @@ public class FriendDao {
 		int s1=0,s2=0,sum=0;
 			try {
 				conn=ConUtil.getConnection();
-			dto=dao.getUserInfo(loginEmail);	
+			dto=dao.getUser(loginEmail);	
 			sql="insert into FRIEND(EMAIL,FRIENDEMAIL,STATE)values(?,?,?)";
 			pstmt=conn.prepareStatement(sql);//친구의 친구목록에 사용자 가 친구요청으로 등록
 			pstmt.setString(1, friendEmail);
@@ -86,7 +86,7 @@ public class FriendDao {
 			s1=pstmt.executeUpdate();
 			System.out.println("s1="+s1);
 		
-			dto=dao.getUserInfo(friendEmail);
+			dto=dao.getUser(friendEmail);
 			sql="insert into FRIEND(EMAIL,FRIENDEMAIL,STATE)values(?,?,?)";
 			pstmt=conn.prepareStatement(sql);//사용자의 친구목록에 친구 가 친구요청으로 등록
 			pstmt.setString(1, loginEmail);
@@ -376,7 +376,7 @@ public class FriendDao {
 			while(rs.next()) {
 		
 				String friendEmail=rs.getString(2);
-				dto=dao.getUserInfo(friendEmail);
+				dto=dao.getUser(friendEmail);
 				friendlist.add(dto);
 		}
 		} catch (SQLException e) {
