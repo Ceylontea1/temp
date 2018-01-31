@@ -21,11 +21,19 @@ public class RequestFriendlist implements CommandAction {
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();
 		UsersDto loginUser = userDao.getUser(loginUserEmail);
+		String friendEmail = "";
 		
 		FriendDao Fdao=FriendDao.getInstance();
 		AlarmDao Aldao=AlarmDao.getInstance();
+		List<UsersDto> list = null;
 		
-		List<UsersDto> list=Fdao.showFRlist(loginUser.getEmail());
+		if(req.getParameter("email") == null) {
+			list=Fdao.showFRlist(loginUser.getEmail());
+		}
+		else {
+			friendEmail = req.getParameter("email");
+			list=Fdao.showFRlist(friendEmail);
+		}
 		int count=Fdao.FriendCount(loginUser.getEmail());
 		
 		req.setAttribute("loginUser", loginUser);

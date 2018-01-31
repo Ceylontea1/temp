@@ -3,16 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:if test="${result==2}"> 
-	<meta http-equiv="Refresh"
-   			content="0;url='${pageContext.request.contextPath}/friend/searchfriendinit.do">
 	<script>
 		alert('친구요청 하였습니다.');
 	
 	</script>
 </c:if>
-<c:if test="${result==0}">	
-	<meta http-equiv="Refresh"
-   			content="0;url='${pageContext.request.contextPath}/friend/searchfriendinit.do'">
+<c:if test="${result==0}">
    	<script>
    		alert('이미 친구요청 하였습니다.');
    		

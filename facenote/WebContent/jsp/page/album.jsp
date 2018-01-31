@@ -48,14 +48,16 @@
 				</td>
 			</tr>
 			<tr>
-				<c:choose>		
-					<c:when test = "${ friendState eq '요청' }">	
-						<td>친구신청</td>
-					</c:when>
-					<c:when test = "${ friendState eq '친구' }">
-						<td>친구목록</td>
-					</c:when>
-				</c:choose>
+				<td>
+					<c:choose>		
+						<c:when test = "${ friendState eq '친구' }">	
+							<a href = "${pageContext.request.contextPath}/friend/requestfriend.do?friendID=${ friend.email }">친구신청</a>
+						</c:when>
+						<c:when test = "${ friendState eq '친구' }">
+							<a href = "${pageContext.request.contextPath}/friend/searchfriendlist.do?email=${ friend.email }">친구목록</a>
+						</c:when>
+					</c:choose>
+				</td>
 			</tr>					
 		</c:when>
 	</c:choose>
