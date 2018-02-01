@@ -21,7 +21,7 @@
 <table>
 	<tr>
 		<td rowspan = "2">
-			<img src = "${ loginUser.imagepath }" width = "150" height = "150">
+			<img src = "${pageContext.request.contextPath}/${ loginUser.imagepath }" width = "150" height = "150">
 		</td>
 		<td>${ loginUser.name }</td>
 		<td><a href = "${pageContext.request.contextPath}/album.do?email=${ loginUser.email }">사진첩</a></td>

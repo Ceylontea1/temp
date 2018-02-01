@@ -66,7 +66,7 @@
 			<label>	프로필 사진</label>
 			</td>
 			<td>
-				<img src = "${ loginUser.imagepath }" width = "150" height = "150">
+				<img src = "${pageContext.request.contextPath}/${ loginUser.imagepath }" width = "150" height = "150">
 			</td>
 		</tr>
 		<tr>

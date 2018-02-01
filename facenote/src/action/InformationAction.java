@@ -21,7 +21,7 @@ public class InformationAction implements CommandAction {
 		String[] password = new String[1];
 		password[0] = loginUser.getPassword();
 		
-		req.setAttribute("alarmCount", Aldao.getAlarmCount("cap911218@hanmail.net"));
+		req.setAttribute("alarmCount", Aldao.getAlarmCount(loginUserEmail));
 
 		req.setAttribute("loginUser", loginUser);
 		req.setAttribute("phoneSplit", (loginUser.getPhone()).split("-"));

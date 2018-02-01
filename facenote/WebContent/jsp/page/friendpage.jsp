@@ -20,7 +20,7 @@
 <table>
 	<tr>
 		<td rowspan = "2">
-			<img src = "${ friend.imagepath }" width = "150" height = "150">
+			<img src = "${pageContext.request.contextPath}/${ friend.imagepath }" width = "150" height = "150">
 		</td>
 		<td>${ friend.name }</td>
 		<td></td>

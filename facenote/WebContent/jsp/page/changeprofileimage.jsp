@@ -45,7 +45,7 @@
 		</tr>
 		<tr>
 			<td>
-				<img src = "${ loginUser.imagepath }" width = "350">
+				<img src = "${pageContext.request.contextPath}/${ loginUser.imagepath }" width = "350">
 			</td>
 			<td>				
 				<img id="blah" src="#" width = "350">

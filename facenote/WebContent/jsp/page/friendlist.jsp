@@ -45,7 +45,7 @@
 		<c:set var="ID" value="${list.email}"/>
 	<form action="${pageContext.request.contextPath}/friend/deletefriend.do">
 	<input type="hidden" name="friendID" value="${ID}"/>
-	<tr><td><img src="${list.imagepath}" width="100" height="100"/></td><td><a href="${pageContext.request.contextPath}/friendpage.do?friendmail=${list.email}">${list.name}</a></td>
+	<tr><td><img src="${pageContext.request.contextPath}/${list.imagepath}" width="100" height="100"/></td><td><a href="${pageContext.request.contextPath}/friendpage.do?friendmail=${list.email}">${list.name}</a></td>
 	<td><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>친구 끊기</button></td></tr>
 	</form>
 	</c:forEach>

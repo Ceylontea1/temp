@@ -78,7 +78,7 @@ function myFunction(){
   	<form action="${pageContext.request.contextPath}/friend/requestfriend.do" method="get">
     <tr>
     <td><input type="hidden" value="${list.email}"name="friendID"/>
-     <img src= "${list.imagepath}" width="150"height="150"> </td>
+     <img src= "${pageContext.request.contextPath}/${list.imagepath}" width="150"height="150"> </td>
      <td><a href="${pageContext.request.contextPath}/friendpage.do?friendmail=${list.email}">${list.name}</a></td><td><label>${list.email}</label></td>
      <td><button type="submit" class="btn btn-primary">
 					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>친구신청</button></td>

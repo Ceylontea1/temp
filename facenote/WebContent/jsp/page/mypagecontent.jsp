@@ -19,7 +19,7 @@
 					<a href = "${pageContext.request.contextPath}/friendpage.do?friendmail=${ content.writer }" target = "_parent">${ writer.get(status.index) }</a><br>
 				content : ${ content.content }<br>
 				<c:if test = "${ content.imagepath ne null }">
-					<img src = "${ content.imagepath }" width = "100" height = "100">
+					<img src = "${pageContext.request.contextPath}/${ content.imagepath }" width = "100" height = "100">
 				</c:if>
 				<br>
 				regdate : ${ content.regdate }<br>
@@ -30,7 +30,7 @@
 			<c:if test = "${ loginUser.email eq content.writer }">
 				content : ${ content.content }<br>
 				<c:if test = "${ content.imagepath ne null }">
-					<img src = "${ content.imagepath }" width = "100" height = "100">
+					<img src = "${pageContext.request.contextPath}/${ content.imagepath }" width = "100" height = "100">
 				</c:if>
 				<br>
 				regdate : ${ content.regdate }<br>

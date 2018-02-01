@@ -18,7 +18,7 @@
 		<c:when test = "${ albumAccount.email eq loginUser.email }">
 			<tr>
 				<td rowspan = "2">
-					<img src = "${ loginUser.imagepath }" width = "150" height = "150" onclick = "OnloadImg(this.src)">
+					<img src = "${pageContext.request.contextPath}/${ loginUser.imagepath }" width = "150" height = "150" onclick = "OnloadImg(this.src)">
 				</td>
 				<td>
 					<a href = "${pageContext.request.contextPath}/mypage.do">${ loginUser.name }</a>
@@ -41,7 +41,7 @@
 		<c:when test = "${ albumAccount.email ne loginUser.email }">
 			<tr>
 				<td rowspan = "2">
-					<img src = "${ albumAccount.imagepath }" width = "150" height = "150">
+					<img src = "${pageContext.request.contextPath}/${ albumAccount.imagepath }" width = "150" height = "150">
 				</td>
 				<td>
 					<a href = "friendpage.do?friendmail=${ albumAccount.email }" target = "_parent">${ albumAccount.name }</a>

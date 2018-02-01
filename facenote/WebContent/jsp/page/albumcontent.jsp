@@ -12,7 +12,7 @@
 			<br>
 		</c:if>
 		<c:if test = "${ content.imagepath ne null }">
-			<img src = "${ content.imagepath }" width = "150" height = "150">
+			<img src = "${pageContext.request.contextPath}/${ content.imagepath }" width = "150" height = "150">
 		</c:if>
 	</c:forEach>
 </body>
