@@ -38,9 +38,13 @@
 			</c:choose>
 		</td>
 	</tr>
+	<tr>
+		<td colspan = "3">
+			<a href = "${pageContext.request.contextPath}/FaceNote/writeContent.do?pageemail=${ friend.email }">글 쓰기</a>
+		</td>
+	</tr>
 </table>
-<a href = "${pageContext.request.contextPath}/FaceNote/writeContent.do">글 쓰기</a>
-	<iframe src = "friendpagecontent.do?friendmail=${ friend.email }" width = "80%" height = "500" frameborder = "0">
+	<iframe src = "${pageContext.request.contextPath}/friendpagecontent.do?friendmail=${ friend.email }" width = "80%" height = "500" frameborder = "0">
 	
 	</iframe>
 </div>

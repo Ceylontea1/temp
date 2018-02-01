@@ -6,6 +6,7 @@ public class ReplyDto {
 	private String replyid;
 	private String contentid;
 	private String writer;
+	private String writername;
 	private String content;
 	private Timestamp regdate; 
 	
@@ -50,4 +51,14 @@ public class ReplyDto {
 	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
 	}
+
+	public String getWritername() {
+		return writername;
+	}
+
+	public void setWritername(String writername) {
+		this.writername = writername;
+	}
+	
+	
 }

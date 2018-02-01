@@ -27,20 +27,9 @@
 	}); 
 }); */
 
-function modify(){
-	
-	var frm = document.getElementById("frm");
-	var contentid = document.getElementById("contentid").value;
-	alert("오냐?");
-	frm.action = "${pageContext.request.contextPath}/FaceNote/updatecontent.do?contentid=" + contentid;
-	frm.method = "post";
-	frm.submit();	
-}
-
 function uplike(){
 	var frm = document.getElementById("frm");
 
-	/* frm.action = "${pageContext.request.contextPath}/FaceNote/upLike.do?contentid=${ConDto.contentid}" ; */
 	frm.action = "${pageContext.request.contextPath}/FaceNote/upLike.do" ;
 	frm.method = "post"
 	frm.submit();
@@ -61,30 +50,29 @@ function writercomment(){
 <body>
 	<div align="center">
 		<form id="frm">
-			<input type="hidden" name="contentid" value="${ConDto.contentid}">
 			<c:if test="${empty ConDto}">
 				<h1>표시할 내용이 없습니다.</h1>
 				<!-- <a href="javascript:history.go(-1);">이전페이지로</a> -->
 				<a href="javascript:self.close();">창닫기</a>
 			</c:if>
 			<c:if test="${!empty ConDto}">
-				페이지 E-mail : ${pageemail}<br>
-				로그인 E-mail : ${loginemail}<br>
-				<input type="hidden" name="contentid" value="${ConDto.contentid}">
+				<input type="hidden" name="contentid" value="${ConDto.contentnum}">
 				<table border="1" style="with: 500px; text-align: center;">
 					<tr>
 						<c:if test="${ConDto.email eq ConDto.writer }">
-							<td><a href="#" target="_blank" title="${Writer.email}">${Writer.name}</a></td>
+							<td><a href="/mypage.do" target="_parent" title="${Writer.email}">${Writer.name}</a></td>
 						</c:if>
 						<c:if test="${ConDto.email ne ConDto.writer }">
-							<td><a href="#" target="_blank" title="${Writer.email}">${Writer.name}</a>
-								-> <a href="#" target="_blank" title="${HostEmail.email}">${HostEmail.name}</a></td>
+							<td><a href="${pageContext.request.contextPath}/friendpage.do?friendmail=${ Writer.email }" target="_opener">${Writer.name}</a>
+								-> <a href="${pageContext.request.contextPath}/mypage.do" target="_opener">${HostEmail.name}</a></td>
 						</c:if>
 						<td>${ConDto.regdate}</td>
 					</tr>
+					<c:if test = "${ConDto.imagepath ne null }">
 					<tr>
-						<td colspan="2" align="center"><img src="${ConDto.imagepath}"></td>
+						<td colspan="2" align="center"><img src="${pageContext.request.contextPath}/${ConDto.imagepath}"></td>
 					</tr>
+					</c:if>
 					<tr>
 						<td colspan="2">${ConDto.content}</td>
 					</tr>
@@ -99,7 +87,7 @@ function writercomment(){
 					<c:if test="${Replycnt ne 0}">
 						<c:forEach var="reply" items="${ReDtoList}">
 							<tr>
-								<td>${reply.writer}</td>
+								<td>${reply.writername}</td><!-- 댓글 작성자로 링크 -->
 								<td>${reply.content}</td>
 							</tr>
 						</c:forEach>
@@ -110,7 +98,7 @@ function writercomment(){
 					<tr>
 						<td colspan="2">
 						<c:if test="${ConDto.writer eq loginemail or ConDto.email eq loginemail }">
-								<input type="button" name="mod" value="수정" onClick="modify()">&nbsp;&nbsp;
+								<input type="button" name="mod" value="수정" onClick="#">&nbsp;&nbsp;
 								<input type="button" name="del" value="삭제" onClick="#">&nbsp;&nbsp;
 						</c:if>
 								<input type="button" name="close" value="닫기" onClick="javascript:self.close();">

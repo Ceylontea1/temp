@@ -24,7 +24,7 @@ public class writeContentAction implements CommandAction{
 			UsersDto pageUser = new UsersDto();
 			String pageEmail;
 
-			pageEmail = (String)(request.getSession().getAttribute("pageemail"));			
+			pageEmail = request.getParameter("pageemail");			
 			
 			pageUser = UDA.getUser(pageEmail);
 			

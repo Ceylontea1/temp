@@ -37,7 +37,7 @@ public class UpLikeAction implements CommandAction{
 		ConDto = ConDao.getContentbyNum(contentid);		
 		if(LDao.insertLike(LDto) && !(ConDto.getWriter().equals(liker))) {
 			
-			ConDto.setGood(ConDto.getGood()+1);
+			ConDto.setGood(String.valueOf(Integer.parseInt(ConDto.getGood())+1));
 			
 			ConDao.updateContent(ConDto);
 		}

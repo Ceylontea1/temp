@@ -74,7 +74,7 @@ function checkvalue() {
 <%@ include file = "../main/header.jsp" %>
 	<div style="align: center;">
 		<h1 align="center">게시물 작성</h1>
-		<form name="frm1" action="${pageContext.request.contextPath}/FaceNote/writerContentPro.do" method="post" enctype="multipart/form-data">		
+		<form name="frm1" action="${pageContext.request.contextPath}/FaceNote/writerContentPro.do?pageemail=${ pageUser.email }" method="post" enctype="multipart/form-data">		
 			<table border="1" style="text-align: center;">
 				<tr>
 				<c:if test="${loginUser.email eq pageUser.email}">

@@ -27,7 +27,7 @@ public class LikeDao {
 		ResultSet rs = null;
 		try {
 			conn = ConUtil.getConnection();
-			pstmt = conn.prepareStatement("select * from T_LIKE where CONTENTID = ? and LIKEUSER = ?");
+			pstmt = conn.prepareStatement("select * from GOOD where CONTENTNUM = ? and GOODMAIL = ?");
 			pstmt.setString(1, LDto.getContentid());
 			pstmt.setString(2, LDto.getLikeuser());
 			rs = pstmt.executeQuery();
@@ -72,7 +72,7 @@ public class LikeDao {
 		if (!checkLiked(LDto)) {
 			try {
 				conn = ConUtil.getConnection();
-				pstmt = conn.prepareStatement("insert into T_LIKE(CONTENTID,LIKEUSER) values(?,?)");
+				pstmt = conn.prepareStatement("insert into GOOD(CONTENTNUM,GOODMAIL) values(?,?)");
 				pstmt.setString(1, LDto.getContentid());
 				pstmt.setString(2, LDto.getLikeuser());
 				pstmt.executeUpdate();

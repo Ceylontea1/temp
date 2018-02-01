@@ -29,7 +29,8 @@ public class writeContentProAction implements CommandAction {
 		ContentsDto ConDto = new ContentsDto();
 		ContentsDao ConDao = ContentsDao.getInstance();
 		
-		String pageUserEmail = (String) session.getAttribute("pageemail");
+		String pageUserEmail = request.getParameter("pageemail");
+		System.out.println("writeContentProAction - pageUserEmail : " + pageUserEmail);
 		String[] emailSplit = pageUserEmail.split("@");
 	    String newEmail = emailSplit[0] + "_" + emailSplit[1];
 		int count = ConDao.getCount(pageUserEmail);
@@ -46,13 +47,12 @@ public class writeContentProAction implements CommandAction {
 		if (!checkFolder.exists()) {
 			checkFolder.mkdirs();
 		}
-		System.out.println("���ε� ����" + uploadFilePath);
 		
 		MultipartRequest multi = new MultipartRequest(request, uploadFilePath, uploadFileSizeLimit, encType,
 				new DefaultFileRenamePolicy());
 		String ImagePath = "";
 		String fileName = multi.getFilesystemName("imagepath");
-		if(!fileName.equals("")) {
+		if(fileName != null) {
 			Path source = Paths.get(uploadFilePath + fileName);
 			
 			File ContentImage = new File(uploadFilePath + "\\" + fileName);
@@ -64,16 +64,20 @@ public class writeContentProAction implements CommandAction {
 		ConDto.setEmail(pageUserEmail);
 		ConDto.setWriter(loginUserEmail);
 		ConDto.setContent(multi.getParameter("content"));
-		ConDto.setImagepath(ImagePath);
+		if(fileName != null) {
+			ConDto.setImagepath(ImagePath);
+		}
 		ConDto.setContentnum(contentId);
 		ConDto.setScope(multi.getParameter("scope"));
 
 		ConDao.insertContent(ConDto);
 
 		if(pageUserEmail.equals(loginUserEmail)) {
+			System.out.println("writeContentProAction - pageUserEmail.equals(loginUserEmail) : " + pageUserEmail.equals(loginUserEmail));
 			return "/mypage.do";
 		}
 		else {
+			System.out.println("writeContentProAction - pageUserEmail.equals(loginUserEmail) : " + pageUserEmail.equals(loginUserEmail));
 			return "/friendpage.do?friendmail=" + pageUserEmail;
 		}
 	}

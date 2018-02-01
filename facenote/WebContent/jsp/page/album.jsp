@@ -34,7 +34,7 @@
 			</tr>
 			<tr>
 				<td colspan = "3">
-					<a href = "${pageContext.request.contextPath}/FaceNote/writeContent.do">글 쓰기</a>
+					<a href = "${pageContext.request.contextPath}/FaceNote/writeContent.do?pageemail=${ albumAccount.email }">글 쓰기</a>
 				</td>
 			</tr>
 		</c:when>

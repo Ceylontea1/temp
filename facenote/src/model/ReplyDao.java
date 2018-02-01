@@ -33,7 +33,7 @@ public class ReplyDao {
 
 		try {
 			conn = ConUtil.getConnection();
-			pstmt = conn.prepareStatement("select count(*) from REPLY where CONTENTID = ?");
+			pstmt = conn.prepareStatement("select count(*) from REPLY where CONTENTNUM = ?");
 			pstmt.setString(1, ReDto.getContentid());
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -72,13 +72,17 @@ public class ReplyDao {
 	public void writeReply(ReplyDto ReDto) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		
+		UsersDao UDao = UsersDao.getInstance();
+		
 		try {
 			conn = ConUtil.getConnection();
-			pstmt = conn.prepareStatement("insert into REPLY(REPLYID,CONTENTID,WRITER,CONTENT) values(?,?,?,?)");
+			pstmt = conn.prepareStatement("insert into REPLY(REPLYID,CONTENTNUM,WRITER,CONTENT,WRITERNAME) values(?,?,?,?,?)");
 			pstmt.setString(1, makeReplyid(ReDto));
 			pstmt.setString(2, ReDto.getContentid());
 			pstmt.setString(3, ReDto.getWriter());
 			pstmt.setString(4, ReDto.getContent());
+			pstmt.setString(5, UDao.getUser(ReDto.getWriter()).getName());
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -109,7 +113,7 @@ public class ReplyDao {
 
 		try {
 			conn = ConUtil.getConnection();
-			pstmt = conn.prepareStatement("select * from REPLY where CONTENTID = ?  ORDER BY REGDATE DESC ");
+			pstmt = conn.prepareStatement("select * from REPLY where CONTENTNUM = ?  ORDER BY REGDATE DESC ");
 			pstmt.setString(1, contentid);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -118,10 +122,11 @@ public class ReplyDao {
 				}
 				ReplyDto comment = new ReplyDto();
 				comment.setReplyid(rs.getString("replyid"));
-				comment.setContentid(rs.getString("contentid"));
+				comment.setContentid(rs.getString("contentnum"));
 				comment.setWriter(rs.getString("writer"));
 				comment.setContent(rs.getString("content"));
 				comment.setRegdate(rs.getTimestamp("regdate"));
+				comment.setWritername(rs.getString("writername"));
 				comments.add(comment);
 			}
 			if (comments == null) {
@@ -163,13 +168,13 @@ public class ReplyDao {
 
 		try {
 			conn = ConUtil.getConnection();
-			pstmt = conn.prepareStatement("select * from REPLY where CONTENTID = ?  ORDER BY REGDATE DESC ");
+			pstmt = conn.prepareStatement("select * from REPLY where CONTENTNUM = ? ORDER BY REGDATE DESC ");
 			pstmt.setString(1, contentid);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				Reply = new ReplyDto();
 				Reply.setReplyid(rs.getString("replyid"));
-				Reply.setContentid(rs.getString("contentid"));
+				Reply.setContentid(rs.getString("contentnum"));
 				Reply.setWriter(rs.getString("writer"));
 				Reply.setContent(rs.getString("content"));
 				Reply.setRegdate(rs.getTimestamp("regdate"));

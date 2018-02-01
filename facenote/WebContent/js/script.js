@@ -22,6 +22,3 @@ function OnloadImg(url){	// img 새 창에서 크게
 
 	var OpenWindow = window.open(''+url+'','_blank', 'width='+winWidth+', height='+winHeight+', menubars=no, scrollbars=auto');
 }
-function readContent(url){
-		window.open(''+url+'','_blank', 'width=800, height=700', 'menubars=no, scrollbars=auto');
-}

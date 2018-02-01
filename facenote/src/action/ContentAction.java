@@ -14,6 +14,8 @@ public class ContentAction implements CommandAction{
 		request.setCharacterEncoding("UTF-8");
 		String contentid = request.getParameter("contentid");
 		
+		System.out.println(contentid);
+		
 //		String contentid = "ccc_test.com_9";
 		ContentsDao ConDao = ContentsDao.getInstance();
 		
@@ -45,6 +47,12 @@ public class ContentAction implements CommandAction{
 		request.setAttribute("ConDto", ConDto);
 		request.setAttribute("ReDtoList", ReDtoList);
 		request.setAttribute("Replycnt", ReDtoList.size());
+		request.setAttribute("contentid", ConDto.getContentnum());
+		
+		System.out.println("ContentAction : imagepath >>> " + ConDto.getImagepath());
+		System.out.println("ContemtAction : 컨텐츠 받아오고 아이디" + ConDto.getContentnum());
+		System.out.println("ContentAction : 무사히 끝남");
+		
 		return "/jsp/page/contentForm.jsp";
 	}
 	

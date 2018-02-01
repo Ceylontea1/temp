@@ -12,7 +12,6 @@ import model.UsersDto;
 public class MyPageAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest req, HttpServletResponse reps) throws Throwable {
-		System.out.println("req.email : " + req.getParameter("email"));
 		HttpSession session=req.getSession();
 		UsersDao userDao = UsersDao.getInstance();
 		UsersDto loginUser =null;

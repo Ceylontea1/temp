@@ -36,12 +36,12 @@
 	</tr>
 	<tr>
 		<td colspan = "3">
-			<a href = "${pageContext.request.contextPath}/FaceNote/writeContent.do">글 쓰기</a>
+			<a href = "${pageContext.request.contextPath}/FaceNote/writeContent.do?pageemail=${ loginUser.email }">글 쓰기</a>
 		</td>
 	</tr>
 </table>
 
-	<iframe src = "mypagecontent.do?loginEmail=${ loginUser.email }" width = "80%" height = "500" frameborder = "0">
+	<iframe src = "${pageContext.request.contextPath}/mypagecontent.do?loginEmail=${ loginUser.email }" width = "80%" height = "500" frameborder = "0">
 	
 	</iframe>
 	</div>

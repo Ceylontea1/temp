@@ -180,7 +180,6 @@ public class ContentsDao {
 		return contents;
 	}
 	//글을 가져오는 것은 모두 최신 글이 위로 오도록 함
-/*
 
 	public int getContentsCount() {
 		Connection conn = null;
@@ -220,7 +219,7 @@ public class ContentsDao {
 			}
 		}
 		return count;
-	}*/
+	}
 	
 	public ContentsDto getContentbyNum(String contentid) {
 		Connection conn = null;
@@ -332,7 +331,7 @@ public class ContentsDao {
 //				if(rs.next())
 //				ConDto.setContentid(ConDto.getEmail() + "_" + String.valueOf(rs.getInt(1)));
 //				pstmt.close();
-				pstmt = conn.prepareStatement("insert into CONTENTS(EMAIL, WRITER, CONTENTNUM, CONTENT, IMAGEPATH, SCOPE, REGDATE) values(?,?,?,?,?,?,?)");
+				pstmt = conn.prepareStatement("insert into CONTENTS(EMAIL, WRITER, CONTENTNUM, CONTENT, IMAGEPATH, SCOPE, REGDATE, GOOD) values(?,?,?,?,?,?,?,?)");
 				
 				//EMAIL, WRITER, CONTENTID, CONTENT, IMAGEPATH, SCOPE
 				pstmt.setString(1, ConDto.getEmail());
@@ -344,6 +343,7 @@ public class ContentsDao {
 				pstmt.setString(5, ConDto.getImagepath());
 				pstmt.setString(6, ConDto.getScope());
 				pstmt.setString(7, this.getDate());
+				pstmt.setInt(8, 0);
 				
 				pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -418,7 +418,7 @@ public class ContentsDao {
 	
 	public String getDate() {
 		String time="";
-		SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd",Locale.KOREA);
+		SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd hh:mm",Locale.KOREA);
 		Date currentTime=new Date();
 		time=formatter.format(currentTime);
 		
