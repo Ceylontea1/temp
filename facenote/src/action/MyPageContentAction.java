@@ -24,7 +24,7 @@ public class MyPageContentAction implements CommandAction {
 		List<String> writers = null;
 		List<String> contentLocations = null;
 
-		contents = contentsDao.getContent(loginUserEmail);
+		contents = contentsDao.getContentbyEmail(loginUserEmail);
 		loginUser = userDao.getUser(loginUserEmail);
 		writers = userDao.getWriters(contents);
 		contentLocations = userDao.getUsers(contents);

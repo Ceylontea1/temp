@@ -24,7 +24,7 @@ public class FriendPageContentAction implements CommandAction {
 		List<String> writers = null;
 		List<String> contentLocations = null;
 						
-		contents = contentsDao.getContent(req.getParameter("friendmail"));
+		contents = contentsDao.getContentbyEmail(req.getParameter("friendmail"));
 		loginUser = userDao.getUser(loginUserEmail);
 		writers = userDao.getUsers(contents);
 		contentLocations = userDao.getUsers(contents);

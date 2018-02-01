@@ -9,6 +9,7 @@ public class ContentsDto {
 	private String scope;
 	private String regdate;
 	private String good;
+	
 	public String getEmail() {
 		return email;
 	}

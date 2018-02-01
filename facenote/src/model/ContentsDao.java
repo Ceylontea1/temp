@@ -3,8 +3,12 @@ package model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ContentsDao {
 	
@@ -150,7 +154,7 @@ public class ContentsDao {
 	}
 	
 	//loginEmail에 써진 글 가져오는 것
-	public List<ContentsDto> getContent(String loginEmail) {
+	public List<ContentsDto> getContentbyEmail(String loginEmail) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -176,7 +180,249 @@ public class ContentsDao {
 		return contents;
 	}
 	//글을 가져오는 것은 모두 최신 글이 위로 오도록 함
+/*
 
+	public int getContentsCount() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0 ;
+		try {
+				conn = ConUtil.getConnection();
+				pstmt = conn.prepareStatement("select count(*) from CONTENTS");
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					count = rs.getInt(1);
+				}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) { 
+				try {
+					rs.close();
+				}catch(SQLException e) {
+					
+				}
+			}
+			if(pstmt != null) { 
+				try {
+					pstmt.close();
+				}catch(SQLException e) {
+					
+				}
+			}
+			if(conn != null) { 
+				try {
+					conn.close();
+				}catch(SQLException e) {
+					
+				}
+			}
+		}
+		return count;
+	}*/
 	
+	public ContentsDto getContentbyNum(String contentid) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ContentsDto article = null;
+		
+		try {
+				conn = ConUtil.getConnection();
+				pstmt = conn.prepareStatement("select * from CONTENTS where CONTENTNUM = ?");
+				pstmt.setString(1, contentid);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					article = new ContentsDto();
+					article.setEmail(rs.getString("email"));
+					article.setWriter(rs.getString("writer"));
+					article.setContent(rs.getString("content"));
+					article.setImagepath(rs.getString("imagepath"));
+					article.setRegdate(rs.getString("regdate"));
+					article.setScope(rs.getString("scope"));
+					article.setGood(rs.getString("good"));
+					article.setContentnum(rs.getString("contentnum"));
+				}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) { 
+				try {
+					rs.close();
+				}catch(SQLException e) {
+					
+				}
+			}
+			if(pstmt != null) { 
+				try {
+					pstmt.close();
+				}catch(SQLException e) {
+					
+				}
+			}
+			if(conn != null) { 
+				try {
+					conn.close();
+				}catch(SQLException e) {
+					
+				}
+			}
+		}
+			return article;
+	}
+	
+	public void updateContent(ContentsDto ConDto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ContentsDto article = null;
+		
+		try {
+				conn = ConUtil.getConnection();
+				pstmt = conn.prepareStatement("update CONTENTS set EMAIL = ?, WRITER = ?, CONTENT = ?, IMAGEPATH = ?, SCOPE = ?, GOOD = ? where CONTENTNUM = ?");
+				pstmt.setString(1, ConDto.getEmail());
+				pstmt.setString(2, ConDto.getWriter());
+				pstmt.setString(3, ConDto.getContent());
+				pstmt.setString(4, ConDto.getImagepath());
+				pstmt.setString(5, ConDto.getScope());
+				pstmt.setString(6, ConDto.getGood());
+				pstmt.setString(7, ConDto.getContentnum());
+				
+				pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) { 
+				try {
+					rs.close();
+				}catch(SQLException e) {
+					
+				}
+			}
+			if(pstmt != null) { 
+				try {
+					pstmt.close();
+				}catch(SQLException e) {
+					
+				}
+			}
+			if(conn != null) { 
+				try {
+					conn.close();
+				}catch(SQLException e) {
+					
+				}
+			}
+		}
+	}
+	
+	public void insertContent(ContentsDto ConDto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ContentsDto article = null;
+		
+		try {
+				conn = ConUtil.getConnection();
+				
+//				pstmt = conn.prepareStatement("select count(*)from CONTENTS where EMAIL = ?");
+//				pstmt.setString(1, ConDto.getEmail());
+//				rs = pstmt.executeQuery();
+//				if(rs.next())
+//				ConDto.setContentid(ConDto.getEmail() + "_" + String.valueOf(rs.getInt(1)));
+//				pstmt.close();
+				pstmt = conn.prepareStatement("insert into CONTENTS(EMAIL, WRITER, CONTENTNUM, CONTENT, IMAGEPATH, SCOPE, REGDATE) values(?,?,?,?,?,?,?)");
+				
+				//EMAIL, WRITER, CONTENTID, CONTENT, IMAGEPATH, SCOPE
+				pstmt.setString(1, ConDto.getEmail());
+				pstmt.setString(2, ConDto.getWriter());
+				pstmt.setString(3, ConDto.getContentnum());
+				pstmt.setString(4, ConDto.getContent());
+				System.out.println("Contentid>>>>>>>>>>>>" + ConDto.getContentnum());
+				System.out.println("imagepath>>>>" + ConDto.getImagepath());
+				pstmt.setString(5, ConDto.getImagepath());
+				pstmt.setString(6, ConDto.getScope());
+				pstmt.setString(7, this.getDate());
+				
+				pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) { 
+				try {
+					rs.close();
+				}catch(SQLException e) {
+					
+				}
+			}
+			if(pstmt != null) { 
+				try {
+					pstmt.close();
+				}catch(SQLException e) {
+					
+				}
+			}
+			if(conn != null) { 
+				try {
+					conn.close();
+				}catch(SQLException e) {
+					
+				}
+			}
+		}
+	}
+	
+/*	public int getCount(String email) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ContentsDto article = null;
+		int count = 0;
+		try {
+				conn = ConUtil.getConnection();
+				
+				pstmt = conn.prepareStatement("select count(*)from CONTENTS where EMAIL = ?");
+				pstmt.setString(1, email);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					count = rs.getInt(1);
+				}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) { 
+				try {
+					rs.close();
+				}catch(SQLException e) {
+					
+				}
+			}
+			if(pstmt != null) { 
+				try {
+					pstmt.close();
+				}catch(SQLException e) {
+					
+				}
+			}
+			if(conn != null) { 
+				try {
+					conn.close();
+				}catch(SQLException e) {
+					
+				}
+			}
+		}
+		return count;
+	}*/
+	
+	public String getDate() {
+		String time="";
+		SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd",Locale.KOREA);
+		Date currentTime=new Date();
+		time=formatter.format(currentTime);
+		
+		return time;
+	}
 	
 }

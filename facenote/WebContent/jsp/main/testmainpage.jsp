@@ -13,7 +13,5 @@
 <a href = "${pageContext.request.contextPath}/jsp/main/login.jsp">login</a>
 <a href = "${pageContext.request.contextPath}/jsp/main/join.jsp">create</a>
 
-	
-	<img src="../../img/logotmp.png">
 </body>
 </html>

@@ -34,7 +34,7 @@
 			</tr>
 			<tr>
 				<td colspan = "3">
-					upload
+					<a href = "${pageContext.request.contextPath}/FaceNote/writeContent.do">글 쓰기</a>
 				</td>
 			</tr>
 		</c:when>
@@ -62,9 +62,6 @@
 		</c:when>
 	</c:choose>
 </table>
-	
-	사진<p>
-
 	<iframe src = "albumcontent.do?email=${ albumAccount.email }" width = "80%" height = "500" frameborder = "0">
 	
 	</iframe>

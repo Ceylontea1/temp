@@ -39,6 +39,7 @@
 		</td>
 	</tr>
 </table>
+<a href = "${pageContext.request.contextPath}/FaceNote/writeContent.do">글 쓰기</a>
 	<iframe src = "friendpagecontent.do?friendmail=${ friend.email }" width = "80%" height = "500" frameborder = "0">
 	
 	</iframe>

@@ -17,7 +17,7 @@ public class AlbumContentAction implements CommandAction {
 		int count = 0;
 			
 		count = contentsDao.getCount(req.getParameter("email"));		
-		contents = contentsDao.getContent(req.getParameter("email"));
+		contents = contentsDao.getContentbyEmail(req.getParameter("email"));
 		
 		req.setAttribute("contents", contents);
 		req.setAttribute("contentCount", count);

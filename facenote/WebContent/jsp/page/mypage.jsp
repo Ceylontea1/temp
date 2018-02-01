@@ -34,7 +34,13 @@
 			<a href = "${pageContext.request.contextPath}/friend/searchfriendlist.do">친구목록</a>
 		</td>
 	</tr>
+	<tr>
+		<td colspan = "3">
+			<a href = "${pageContext.request.contextPath}/FaceNote/writeContent.do">글 쓰기</a>
+		</td>
+	</tr>
 </table>
+
 	<iframe src = "mypagecontent.do?loginEmail=${ loginUser.email }" width = "80%" height = "500" frameborder = "0">
 	
 	</iframe>
