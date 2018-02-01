@@ -50,6 +50,15 @@
 		var OpenWindow = 
 			window.open('${ pageContext.request.contextPath }/changeprofileimage.do', '_blank', 'width = 800, height = 500, menubars=no, scrollbars=auto');	 
 	}
+	function DeleteUser(){
+		if((document.informationForm.formPassword.value) != (document.informationForm.DBPassword.value)){
+			alert("현재 비밀번호가 다릅니다.");
+			document.informationForm.formPassword.focus();
+			return false;
+		}
+		alert("탈퇴되었습니다.");
+		return true;
+	}
 </script>
 
 </head>
@@ -169,6 +178,11 @@
 		</tr>
 		<tr>
 			<td colspan = "2" align = "center">
+			<button type="button" class="btn btn-primary" onClick="document.location.href='${pageContext.request.contextPath}/userremove.do'">
+				<span class="glyphicon glyphicon-remove" aria-hidden="true">계정탈퇴</span></button>
+					
+			<button class="btn btn-primary" onclick = "history.go(-1);">
+					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>취소</button>
 			<button type="submit" class="btn btn-primary">
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>확인</button>
 			</td>

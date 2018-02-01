@@ -72,16 +72,17 @@
 				<td>내용</td>
 				<td></td>
 			</tr>
-			
+				<c:set var="num" value="${0}"/><!--각 폼에 -->
+				
 			<c:forEach var="list" items="${alarmlist}">
-
+				
 		<form name = "tempForm">
 			<c:choose>
 				<c:when test="${list.content==3}">
 					<!--친구생일 조건문-->
 					<c:set var="content" value="오늘은 ${list.name}님의 생일 입니다." />
 					<c:set var="buttonNM" value="${list.name}님페이지가기" />
-					<c:set var="href" value="${pageContext.request.contextPath}/friendpage.do?friendmail=${ list.friendemail }&count=${list.count}" />
+					<c:set var="href" value="${pageContext.request.contextPath}/friendpage.do?friendmail=${list.friendemail }&count=${list.count}" />
 					<c:set var="hiddenNM" value="#" />
 					<c:set var="hidden" value="${list.count}" />
 					<c:set var="buttonimg" value="glyphicon glyphicon-heart-empty"/>
@@ -92,7 +93,7 @@
 					<c:set var="content" value="${list.name}님이 친구요청 하였습니다." />
 					<c:set var="buttonNM" value="친구수락" />
 					<c:set var="href"
-						value="${pageContext.request.contextPath}/friend/friendreqagree.do?friendID=${ list.friendemail }&count=${list.count}" />
+						value="${pageContext.request.contextPath}/friend/friendreqagree.do?friendID=${list.friendemail }&count=${list.count}" />
 					<c:set var="hiddenNM" value="friendID" />
 					<c:set var="hidden" value="${list.count}" />
 					<c:set var="buttonimg" value="glyphicon glyphicon-user"/>
@@ -110,7 +111,7 @@
 				</c:when>
 			</c:choose>
 			<input type = "hidden" name = "href" value = "${ href }">
-			
+		
 		</form>
 		<form action="${href}" method = "post" target = "_parent" onsubmit = "changeWindow();">
 					<tr>
@@ -127,7 +128,7 @@
 		</form>
 			</c:forEach>
 			<tr>
-				
+					
 					<td colspan="3" align="center">
 					<div class="center-block"><button type="button" class="btn btn-primary" onClick="closeWindow();">
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>홈</button>

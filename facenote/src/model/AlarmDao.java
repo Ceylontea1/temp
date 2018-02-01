@@ -161,7 +161,7 @@ public class AlarmDao {
 		String date="";
 		int count=0;
 		int counttmp=getAlarmCount(loginEamil);
-		if(counttmp==0) {
+		if(counttmp==0) {	
 			count=0;
 		}
 		else if(counttmp!=0) {

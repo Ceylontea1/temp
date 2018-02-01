@@ -5,13 +5,15 @@
 <c:if test="${result==2}"> 
 	<script>
 		alert('친구요청 하였습니다.');
-	
+		history.go(-1);
+	    location.reload(true);
 	</script>
 </c:if>
 <c:if test="${result==0}">
    	<script>
    		alert('이미 친구요청 하였습니다.');
-   		
+   		history.go(-1);
+   		 location.reload(true);
    	</script>
 </c:if>	
 
