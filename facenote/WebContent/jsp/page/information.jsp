@@ -180,7 +180,9 @@
 			<td colspan = "2" align = "center">
 			<button type="button" class="btn btn-primary" onClick="document.location.href='${pageContext.request.contextPath}/userremove.do'">
 				<span class="glyphicon glyphicon-remove" aria-hidden="true">계정탈퇴</span></button>
-			
+					
+			<button class="btn btn-primary" onclick = "history.go(-1);">
+					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>취소</button>
 			<button type="submit" class="btn btn-primary">
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>확인</button>
 			</td>
