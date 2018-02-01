@@ -17,7 +17,7 @@ public class Logout implements CommandAction {
 			session.invalidate();
 		}
 		
-		return "/logintest.do";
+		return "/jsp/main/testmainpage.jsp";
 	}
 
 }
