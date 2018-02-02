@@ -359,4 +359,58 @@ public class UsersDao {
 		
 		return time;
 	}
+
+	public String findUserEmail(String findName, String findPhone) {	// num = 1 : email / 2 : password 
+		String userEmail = "";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select EMAIL from USERS where NAME = ? and PHONE = ?";		
+		try {
+			con = ConUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, findName);
+			pstmt.setString(2, findPhone);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				userEmail = rs.getString("EMAIL");
+			}
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			this.closeConnection(con, pstmt, rs);
+		}
+		return userEmail;
+	}
+	
+	public String findUserPassword(String findEmail) {	// num = 1 : email / 2 : password 
+		String userPassword = "";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select PASSWORD from USERS where EMAIL = ?";		
+		try {
+			con = ConUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, findEmail);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				userPassword = rs.getString("PASSWORD");
+			}
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			this.closeConnection(con, pstmt, rs);
+		}
+		return userPassword;
+	}
 }

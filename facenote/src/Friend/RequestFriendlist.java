@@ -17,6 +17,7 @@ public class RequestFriendlist implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest req, HttpServletResponse reps) throws Throwable {
 		// TODO Auto-generated method stub
+		req.setCharacterEncoding("UTF-8");
 		HttpSession session=req.getSession();
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();

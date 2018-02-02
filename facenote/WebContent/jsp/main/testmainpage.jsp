@@ -12,6 +12,8 @@
 
 <a href = "${pageContext.request.contextPath}/jsp/main/login.jsp">login</a>
 <a href = "${pageContext.request.contextPath}/jsp/main/join.jsp">create</a>
+<a href = "${pageContext.request.contextPath}/jsp/main/findeamil.jsp">id찾기</a>
+<a href = "${pageContext.request.contextPath}/jsp/main/findpassword.jsp">비밀번호 찾기</a>
 
 </body>
 </html>

@@ -12,11 +12,11 @@
 <body>
 	<div class = "content"><!-- scope 0 : 모두 공개, 1 : 친구 공개 -->
 		<c:forEach var = "content" items = "${ contents }" varStatus = "status">		
-				<c:set var = "scope" value = "${ content.scope }" />
-				<c:if test = "${ scope eq '0' || scope eq '1' }">			
-					to : ${ contentLocation.get(status.index) }
-					writer : 
-						<a href = "${pageContext.request.contextPath}/friendpage.do?friendmail=${ content.writer }" target = "_parent">${ writer.get(status.index) }</a><br>
+			<c:set var = "scope" value = "${ content.scope }" />
+			<c:if test = "${ scope eq '0' || scope eq '1' }">			
+				to : ${ contentLocation.get(status.index) }
+				writer : 
+				<a href = "${pageContext.request.contextPath}/friendpage.do?friendmail=${ content.writer }" target = "_parent">${ writer.get(status.index) }</a><br>
 				<div style="cursor: pointer;" onclick="window.open('<c:url value = "/FaceNote/content.do?contentid=${ content.contentnum }" />','창이름','width=800,height=700','menubars=no, scrollbars=auto')">
 					content : ${ content.content }<br>
 					<c:if test = "${ content.imagepath ne null }">
@@ -28,8 +28,8 @@
 					<hr>
 					<br>
 				</div>
-				</c:if>
-				<c:if test = "${ loginUser.email eq content.writer }">
+			</c:if>
+			<c:if test = "${ loginUser.email eq content.writer }">
 				<div style="cursor: pointer;" onclick="window.open('<c:url value = "/FaceNote/content.do?contentid=${ content.contentnum }" />','창이름','width=800,height=700','menubars=no, scrollbars=auto')">
 					content : ${ content.content }<br>
 					<c:if test = "${ content.imagepath ne null }">
@@ -43,7 +43,7 @@
 					<hr>
 					<br>
 				</div>
-				</c:if>
+			</c:if>
 		</c:forEach>
 	</div>
 

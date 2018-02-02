@@ -12,6 +12,7 @@ import model.UsersDto;
 public class MyPageAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest req, HttpServletResponse reps) throws Throwable {
+		req.setCharacterEncoding("UTF-8");
 		HttpSession session=req.getSession();
 		UsersDao userDao = UsersDao.getInstance();
 		UsersDto loginUser =null;

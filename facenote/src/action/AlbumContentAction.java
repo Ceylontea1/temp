@@ -11,6 +11,7 @@ import model.ContentsDto;
 public class AlbumContentAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest req, HttpServletResponse reps) throws Throwable {
+		req.setCharacterEncoding("UTF-8");
 		List<ContentsDto> contents = null;
 		ContentsDao contentsDao = ContentsDao.getInstance();
 		

@@ -19,6 +19,7 @@ import model.UsersDto;
 public class EditProfileImageAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest req, HttpServletResponse reps) throws Throwable {
+		req.setCharacterEncoding("UTF-8");
 		HttpSession session=req.getSession();
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		

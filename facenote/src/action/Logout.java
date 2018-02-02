@@ -9,6 +9,7 @@ public class Logout implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest req, HttpServletResponse reps) throws Throwable {
 		// TODO Auto-generated method stub
+		req.setCharacterEncoding("UTF-8");
 		
 		System.out.println(" Logout Logout");
 		HttpSession session=req.getSession();
