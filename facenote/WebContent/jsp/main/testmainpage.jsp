@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@ include file = "../main/header.jsp" %>
+<%@ include file = "../main/loginheader.jsp" %>
 
 <a href = "${pageContext.request.contextPath}/jsp/main/login.jsp">login</a>
 <a href = "${pageContext.request.contextPath}/jsp/main/join.jsp">create</a>

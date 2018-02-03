@@ -18,13 +18,18 @@ public class MyPageAction implements CommandAction {
 		UsersDto loginUser =null;
 		
 		String loginUserEmail=(String) session.getAttribute("loginUserEmail");
-		if(session.getAttribute("loginUserEmail")==null) {
-			session.setAttribute("loginUserEmail", req.getParameter("email"));	
+		if(session.getAttribute("loginUserEmail")!=null) {
+//			session.setAttribute("loginUserEmail", req.getParameter("email"));	
+			System.out.println("mypage - setSession");
 			loginUserEmail=(String) session.getAttribute("loginUserEmail");
 			if(loginUser==null) {
+				System.out.println("mypage - loginUser==null ");
 				AlarmDao dao=AlarmDao.getInstance();
 				dao.insertBirthdayAlarm("3", loginUserEmail);
 			}
+		}
+		else {
+			return "/jsp/main/testmainpage.jsp";
 		}
 		
 		 loginUserEmail = (String)session.getAttribute("loginUserEmail");

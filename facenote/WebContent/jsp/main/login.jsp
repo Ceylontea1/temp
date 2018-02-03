@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Bootstrap -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
-
 <!-- font awesome -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css" media="screen">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/custom.css">
@@ -15,7 +14,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <body>
-<%@ include file = "../main/header.jsp" %>
+<%@ include file = "../main/loginheader.jsp" %>
 	
 	<div class="container">
 		<form action="${pageContext.request.contextPath}/login.do" method="post" name="frm">

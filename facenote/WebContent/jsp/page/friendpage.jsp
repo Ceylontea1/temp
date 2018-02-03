@@ -27,7 +27,7 @@
 	</tr>
 	<tr>
 		<td><a href = "${pageContext.request.contextPath}/album.do?email=${ friend.email }">사진첩</a></td>
-		<td>
+		<td>ㄴ
 			<c:choose>		
 				<c:when test = "${ friendState ne '친구' }">	
 					<a href = "${pageContext.request.contextPath}/friend/requestfriend.do?friendID=${ friend.email }">친구신청</a>

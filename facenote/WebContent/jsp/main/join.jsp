@@ -117,7 +117,7 @@
 	</script>
 </head>
 <body>
-<%@ include file = "header.jsp" %>
+<%@ include file = "loginheader.jsp" %>
 	<%
 		String userEmail = null;
 		if (session.getAttribute("userEmail") != null){

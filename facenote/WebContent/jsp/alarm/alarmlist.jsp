@@ -24,6 +24,7 @@
 	}
 	
 	function changeWindow(){
+		alert("changeWindow");
 		opener.location.href = document.tempForm.href.value;
 		self.close();
 	}
@@ -81,8 +82,10 @@
 				<c:when test="${list.content==3}">
 					<!--친구생일 조건문-->
 					<c:set var="content" value="오늘은 ${list.name}님의 생일 입니다." />
-					<c:set var="buttonNM" value="${list.name}님페이지가기" />
-					<c:set var="href" value="${pageContext.request.contextPath}/friendpage.do?friendmail=${list.friendemail }&count=${list.count}" />
+					<c:set var="buttonNM" value="${list.name}에게 축하메세지 남기기" />
+					<%-- <c:set var="href" value="${pageContext.request.contextPath}/friendpage.do?friendmail=${list.friendemail }&count=${list.count}" /> --%>
+					<c:set var="href" value="${pageContext.request.contextPath}/FaceNote/writeContent.do?pageemail=${ list.friendemail }" />
+					
 					<c:set var="hiddenNM" value="#" />
 					<c:set var="hidden" value="${list.count}" />
 					<c:set var="buttonimg" value="glyphicon glyphicon-heart-empty"/>
@@ -120,7 +123,8 @@
 						<td>${content}</td>
 						<td><%-- <input type="submit" value="${buttonNM}"> --%>
 						<button type="submit" class="btn btn-primary">
-					<span class="${buttonimg}" aria-hidden="true"></span>${buttonNM}</button>
+							<span class="${buttonimg}" aria-hidden="true"></span>${buttonNM}
+						</button>
 						<%-- <input type="button" value="" onclick ="changeWindow();"> --%>
 						<input type="hidden" name="${hiddenNM}" value="${list.friendemail}" />
 						<input type="hidden" name="count" value="${hidden}" /></td>

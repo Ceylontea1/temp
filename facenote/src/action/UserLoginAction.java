@@ -32,6 +32,7 @@ public class UserLoginAction implements CommandAction {
 			request.getSession().setAttribute("messageType", "성공 메시지");
 			request.getSession().setAttribute("messageContent", "로그인에 성공했습니다.");
 			session.setAttribute("loginUserEmail", userEmail);
+			System.out.println("로그인 성공");
 			return "/mypage.do";
 		}
 		if(result == 2) {
