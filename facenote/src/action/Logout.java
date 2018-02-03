@@ -13,6 +13,11 @@ public class Logout implements CommandAction {
 		
 		System.out.println(" Logout Logout");
 		HttpSession session=req.getSession();
+
+		if(session.getAttribute("loginUserEmail") == null) {
+			return "/jsp/main/join.jsp";
+		}
+		
 		String loginUserEmail=(String) session.getAttribute("loginUserEmail");
 		if(loginUserEmail!=null) {
 			session.invalidate();

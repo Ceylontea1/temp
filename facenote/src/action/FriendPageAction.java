@@ -15,6 +15,11 @@ public class FriendPageAction implements CommandAction {
 		req.setCharacterEncoding("UTF-8");
 
 		HttpSession session=req.getSession();
+
+		if(session.getAttribute("loginUserEmail") == null) {
+			return "/jsp/main/join.jsp";
+		}
+		
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();
 		UsersDto loginUser = userDao.getUser(loginUserEmail);

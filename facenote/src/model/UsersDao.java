@@ -257,18 +257,18 @@ public class UsersDao {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				if(rs.getString("PASSWORD").equals(userPassword)) {
-					return 1;	// 로그인 성공
+					return 1;	// 濡쒓렇�씤 �꽦怨�
 				}
-					return 2;	// 비밀번호 틀림
+					return 2;	// 鍮꾨�踰덊샇 ��由�
 			} else {
-					return 0;	// 해당 사용자가 존재하지 않음
+					return 0;	// �빐�떦 �궗�슜�옄媛� 議댁옱�븯吏� �븡�쓬
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			this.closeConnection(conn, pstmt, rs);
 		}
-		return -1;	// 데이터 베이스 오류
+		return -1;	// �뜲�씠�꽣 踰좎씠�뒪 �삤瑜�
 	}
 	
 	public int registerCheck(String userEmail) {
@@ -282,18 +282,18 @@ public class UsersDao {
 			pstmt.setString(1, userEmail);
 			rs = pstmt.executeQuery();
 			if(rs.next() || userEmail.equals("")) {
-				System.out.println("dao registerCheck 가입 불가능한 이메일");
-				return 0;	// 이미 존재하는 회원
+				System.out.println("dao registerCheck 媛��엯 遺덇��뒫�븳 �씠硫붿씪");
+				return 0;	// �씠誘� 議댁옱�븯�뒗 �쉶�썝
 			} else {
-				System.out.println("dao registerCheck 가입 가능한 회원 이메일");
-				return 1;	// 가입 가능한 회원 이메일
+				System.out.println("dao registerCheck 媛��엯 媛��뒫�븳 �쉶�썝 �씠硫붿씪");
+				return 1;	// 媛��엯 媛��뒫�븳 �쉶�썝 �씠硫붿씪
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			this.closeConnection(conn, pstmt, rs);
 		}
-		return -1;	// 데이터 베이스 오류
+		return -1;	// �뜲�씠�꽣 踰좎씠�뒪 �삤瑜�
 	}
 	
 	public int register(String userEmail, String userPassword, String userName, String userBirth, String userPhone, String userGender, String userProfile) {
@@ -323,7 +323,7 @@ public class UsersDao {
 				this.closeConnection(conn, pstmt, rs);
 			}
 		}
-		return -1;	// 데이터베이스 오류
+		return -1;	// �뜲�씠�꽣踰좎씠�뒪 �삤瑜�
 	}
 	
 	public String getImagePath(String email) {
@@ -413,4 +413,31 @@ public class UsersDao {
 		}
 		return userPassword;
 	}
+
+	public int userRemove(String userEmail, String userPassword) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		if(this.login(userEmail, userPassword) == 1) {
+			String sql = "delete from USERS where EMAIL = ?";
+			
+			try {
+				con = ConUtil.getConnection();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, userEmail);
+				rs = pstmt.executeQuery();
+				
+				return 1;
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				this.closeConnection(con, pstmt, rs);
+			}
+		}
+		return 0;
+	}
+	
 }

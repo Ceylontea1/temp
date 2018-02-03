@@ -14,6 +14,11 @@ public class MyPageAction implements CommandAction {
 	public String requestPro(HttpServletRequest req, HttpServletResponse reps) throws Throwable {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session=req.getSession();
+
+		if(session.getAttribute("loginUserEmail") == null) {
+			return "/jsp/main/join.jsp";
+		}
+		
 		UsersDao userDao = UsersDao.getInstance();
 		UsersDto loginUser =null;
 		
