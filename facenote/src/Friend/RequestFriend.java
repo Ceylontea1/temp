@@ -16,10 +16,11 @@ public class RequestFriend implements CommandAction{
 	public String requestPro(HttpServletRequest req, HttpServletResponse reps) throws Throwable {
 		// TODO Auto-generated method stub
 		req.setCharacterEncoding("UTF-8");
+		String uploadFilePath = req.getSession().getServletContext().getRealPath("/img");
 		HttpSession session=req.getSession();
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();
-		UsersDto loginUser = userDao.getUser(loginUserEmail);
+		UsersDto loginUser = userDao.getUser(loginUserEmail, uploadFilePath);
 		
 		int result=0;
 		
@@ -28,13 +29,13 @@ public class RequestFriend implements CommandAction{
 		FriendDao dao=FriendDao.getInstance();
 	   
 		if(!loginUserEmail.equals(friendID)) {
-		 result=dao.reqFriend(loginUserEmail, friendID);
+		 result=dao.reqFriend(loginUserEmail, friendID, uploadFilePath);
 		}
 		 else {result=0;}//자기자신과는  친구가 될수없음!
 		
 		if(result==2) {//요청이 제대로 되었다면 친구에게 알림을 쏘아준다.
 			AlarmDao AlDao=AlarmDao.getInstance();
-			AlDao.insertFriendAlarm("2", friendID, loginUserEmail);
+			AlDao.insertFriendAlarm("2", friendID, loginUserEmail, uploadFilePath);
 		}
 		req.setAttribute("idsearch",friendID);
 		req.setAttribute("result", result);

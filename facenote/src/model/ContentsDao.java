@@ -44,7 +44,7 @@ public class ContentsDao {
 	}
 	
 	//Content 가져옴
-	public List<ContentsDto> getContentsDto(ResultSet rs) {
+	public List<ContentsDto> getContentsDto(ResultSet rs, String uploadFilePath) {
 		ContentsDto dto = null;
 		List<ContentsDto> contents = new ArrayList<ContentsDto>();
 		
@@ -76,7 +76,7 @@ public class ContentsDao {
 	}
 	
 	//Content에 있는 Writer로 친구 정보 파악
-	public UsersDto getWriter(ResultSet rs) {
+	public UsersDto getWriter(ResultSet rs, String uploadFilePath) {
 		UsersDao userDao = UsersDao.getInstance();
 		UsersDto writer = null;
 		Connection con = null;
@@ -89,7 +89,7 @@ public class ContentsDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, rs.getString("WRITER"));
 			rs2 = pstmt.executeQuery();
-			writer = userDao.getUser(rs2);
+			writer = userDao.getUser(rs2, uploadFilePath);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -128,7 +128,7 @@ public class ContentsDao {
 	}
 	
 	//그냥 모든 글 가져오는 것
-	public List<ContentsDto> getContents() {
+	public List<ContentsDto> getContents(String uploadFilePath) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -141,7 +141,7 @@ public class ContentsDao {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			contents = getContentsDto(rs);
+			contents = getContentsDto(rs, uploadFilePath);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -154,7 +154,7 @@ public class ContentsDao {
 	}
 	
 	//loginEmail에 써진 글 가져오는 것
-	public List<ContentsDto> getContentbyEmail(String loginEmail) {
+	public List<ContentsDto> getContentbyEmail(String loginEmail, String uploadFilePath) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -168,7 +168,7 @@ public class ContentsDao {
 			pstmt.setString(1, loginEmail);
 			rs = pstmt.executeQuery();
 			
-			contents = getContentsDto(rs);
+			contents = getContentsDto(rs, uploadFilePath);
 		}
 		catch(Exception e) {
 			e.printStackTrace();

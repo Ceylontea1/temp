@@ -22,9 +22,11 @@ public class writeContentProAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		HttpSession session=request.getSession();
+		String uploadFilePathTemp = request.getSession().getServletContext().getRealPath("/img");
+
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();
-		UsersDto loginUser = userDao.getUser(loginUserEmail);	
+		UsersDto loginUser = userDao.getUser(loginUserEmail, uploadFilePathTemp);	
 		
 		ContentsDto ConDto = new ContentsDto();
 		ContentsDao ConDao = ContentsDao.getInstance();
@@ -40,7 +42,7 @@ public class writeContentProAction implements CommandAction {
 		int uploadFileSizeLimit = 5 * 1024 * 1024;
 		String encType = "UTF-8";
 		
-		String uploadFilePath = "c:\\img\\contentIMG\\" + newEmail + "\\" + contentId;
+		String uploadFilePath = request.getSession().getServletContext().getRealPath("/img") + "\\contentIMG\\" + newEmail + "\\" + contentId;
 
 		File checkFolder = new File(uploadFilePath);
 

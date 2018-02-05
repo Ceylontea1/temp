@@ -20,9 +20,11 @@ public class GetALlist implements CommandAction{
 		System.out.println("getAllist");
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session=req.getSession();
+		String uploadFilePath = req.getSession().getServletContext().getRealPath("/img");
+
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();
-		UsersDto loginUser = userDao.getUser(loginUserEmail);
+		UsersDto loginUser = userDao.getUser(loginUserEmail, uploadFilePath);
 		
 		AlarmDao Aldao = AlarmDao.getInstance();
 		List<AlarmDto> list = Aldao.getAlarmList(loginUserEmail);

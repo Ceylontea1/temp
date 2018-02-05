@@ -51,9 +51,8 @@ public class UsersDao {
 		}
 	}
 
-	public UsersDto getUser(ResultSet rs) {
+	public UsersDto getUser(ResultSet rs, String uploadFilePath) {
 		UsersDto user = null;
-		
 		try {
 			while(rs.next()) {
 					user = new UsersDto();
@@ -68,7 +67,7 @@ public class UsersDao {
 						user.setimagepath(rs.getString("IMAGEPATH"));
 					}
 					else {
-						user.setimagepath("/img/profileIMG/noneProfile.png");
+						user.setimagepath("img/profileIMG/noneProfile.png");
 					}
 					user.setRegdate(rs.getString("REGDATE"));
 			}
@@ -90,7 +89,7 @@ public class UsersDao {
 		return user;
 	}
 	
-	public UsersDto getUser(String loginEmail) {
+	public UsersDto getUser(String loginEmail, String uploadFilePath) {
 		UsersDto user = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -102,7 +101,7 @@ public class UsersDao {
 			pstmt.setString(1, loginEmail);
 			rs = pstmt.executeQuery();
 			
-			user = this.getUser(rs);
+			user = this.getUser(rs, uploadFilePath);
 		}
 		catch(Exception e) {
 			e.printStackTrace();

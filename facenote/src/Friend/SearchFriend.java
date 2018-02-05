@@ -20,9 +20,11 @@ public class SearchFriend implements CommandAction {
 		// TODO Auto-generated method stub
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session=req.getSession();
+		String uploadFilePath = req.getSession().getServletContext().getRealPath("/img");
+
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();
-		UsersDto loginUser = userDao.getUser(loginUserEmail);
+		UsersDto loginUser = userDao.getUser(loginUserEmail, uploadFilePath);
 
 		List<UsersDto> resultList=new ArrayList<UsersDto>(10);
 		AlarmDao Aldao=AlarmDao.getInstance();

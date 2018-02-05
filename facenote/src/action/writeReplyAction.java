@@ -14,9 +14,11 @@ public class writeReplyAction implements CommandAction{
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		HttpSession session=request.getSession();
+		String uploadFilePath = request.getSession().getServletContext().getRealPath("/img");
+
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();
-		UsersDto loginUser = userDao.getUser(loginUserEmail);		
+		UsersDto loginUser = userDao.getUser(loginUserEmail, uploadFilePath);		
 		
 		request.setCharacterEncoding("UTF-8");
 		ReplyDto ReDto = new ReplyDto();
@@ -26,7 +28,7 @@ public class writeReplyAction implements CommandAction{
 		ReDto.setContent(request.getParameter("reply"));
 		ReDto.setContentid(request.getParameter("contentid"));
 		
-		ReDao.writeReply(ReDto);
+		ReDao.writeReply(ReDto, uploadFilePath);
 		
 		return "/FaceNote/content.do";
 	}

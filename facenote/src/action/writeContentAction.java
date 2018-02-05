@@ -12,11 +12,12 @@ public class writeContentAction implements CommandAction{
 		@Override
 		public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 			request.setCharacterEncoding("UTF-8");
-			
+			String uploadFilePath = request.getSession().getServletContext().getRealPath("/img");
+
 			HttpSession session=request.getSession();
 			String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 			UsersDao userDao = UsersDao.getInstance();
-			UsersDto loginUser = userDao.getUser(loginUserEmail);				
+			UsersDto loginUser = userDao.getUser(loginUserEmail, uploadFilePath);				
 			
 			UsersDao UDA = UsersDao.getInstance();
 			System.out.println("writeAction");
@@ -26,7 +27,7 @@ public class writeContentAction implements CommandAction{
 
 			pageEmail = request.getParameter("pageemail");			
 			
-			pageUser = UDA.getUser(pageEmail);
+			pageUser = UDA.getUser(pageEmail, uploadFilePath);
 			
 			request.setAttribute("loginUser", loginUser);
 			

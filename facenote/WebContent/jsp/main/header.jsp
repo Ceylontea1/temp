@@ -49,8 +49,8 @@
 
 				<div class="col-md-4">
 					<div class="pull-right">
-						<span>접속자 </span>
-						<img src="${loginUser.imagepath}" class="img-rounded" alt="Cinque" width="79" height="80">
+						<span>접속자</span>
+						<img src="${pageContext.request.contextPath}${loginUser.imagepath}" class="img-rounded" alt="Cinque" width="79" height="80">
 						<span>
 							<a href="${pageContext.request.contextPath}/mypage.do">
 								<font color="WHITE">

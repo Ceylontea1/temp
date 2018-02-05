@@ -68,7 +68,7 @@ public class FriendDao {
 		return state;
 	}
 
-	public int reqFriend(String loginEmail,String friendEmail) {
+	public int reqFriend(String loginEmail,String friendEmail, String uploadFilePath) {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		UsersDao dao=UsersDao.getInstance();
@@ -77,7 +77,7 @@ public class FriendDao {
 		int s1=0,s2=0,sum=0;
 			try {
 				conn=ConUtil.getConnection();
-			dto=dao.getUser(loginEmail);	
+			dto=dao.getUser(loginEmail, uploadFilePath);	
 			sql="insert into FRIEND(EMAIL,FRIENDEMAIL,STATE)values(?,?,?)";
 			pstmt=conn.prepareStatement(sql);//친구의 친구목록에 사용자 가 친구요청으로 등록
 			pstmt.setString(1, friendEmail);
@@ -86,7 +86,7 @@ public class FriendDao {
 			s1=pstmt.executeUpdate();
 			System.out.println("s1="+s1);
 		
-			dto=dao.getUser(friendEmail);
+			dto=dao.getUser(friendEmail, uploadFilePath);
 			sql="insert into FRIEND(EMAIL,FRIENDEMAIL,STATE)values(?,?,?)";
 			pstmt=conn.prepareStatement(sql);//사용자의 친구목록에 친구 가 친구요청으로 등록
 			pstmt.setString(1, loginEmail);
@@ -356,7 +356,7 @@ public class FriendDao {
 		
 	}
 	
-	public List<UsersDto> showFRlist(String loginEmail){
+	public List<UsersDto> showFRlist(String loginEmail, String uploadFilePath){
 		List<UsersDto> friendlist;
 		int count=FriendCount(loginEmail);
 		if(count>0) {
@@ -376,7 +376,7 @@ public class FriendDao {
 			while(rs.next()) {
 		
 				String friendEmail=rs.getString(2);
-				dto=dao.getUser(friendEmail);
+				dto=dao.getUser(friendEmail, uploadFilePath);
 				friendlist.add(dto);
 		}
 		} catch (SQLException e) {

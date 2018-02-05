@@ -69,7 +69,7 @@ public class ReplyDao {
 		return Replyid;
 	}
 
-	public void writeReply(ReplyDto ReDto) {
+	public void writeReply(ReplyDto ReDto, String uploadFilePath) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -82,7 +82,7 @@ public class ReplyDao {
 			pstmt.setString(2, ReDto.getContentid());
 			pstmt.setString(3, ReDto.getWriter());
 			pstmt.setString(4, ReDto.getContent());
-			pstmt.setString(5, UDao.getUser(ReDto.getWriter()).getName());
+			pstmt.setString(5, UDao.getUser(ReDto.getWriter(), uploadFilePath).getName());
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {

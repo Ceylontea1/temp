@@ -12,13 +12,15 @@ public class AlbumContentAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest req, HttpServletResponse reps) throws Throwable {
 		req.setCharacterEncoding("UTF-8");
+		String uploadFilePath = req.getSession().getServletContext().getRealPath("/img");
+
 		List<ContentsDto> contents = null;
 		ContentsDao contentsDao = ContentsDao.getInstance();
 		
 		int count = 0;
 			
 		count = contentsDao.getCount(req.getParameter("email"));		
-		contents = contentsDao.getContentbyEmail(req.getParameter("email"));
+		contents = contentsDao.getContentbyEmail(req.getParameter("email"), uploadFilePath);
 		
 		req.setAttribute("contents", contents);
 		req.setAttribute("contentCount", count);
