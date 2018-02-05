@@ -129,14 +129,14 @@ public class AlarmDao {
 		return count;
 	}
 
-	public String[] friendBirthdayCheck(String loginEamil, String uploadFilePath) {//데이가 같을때 인설트한다.
+	public String[] friendBirthdayCheck(String loginEamil) {//데이가 같을때 인설트한다.
 
 	
 		String currentDate=date();
 		String Cmonth=currentDate.split("-")[0];
 		String Cday=currentDate.split("-")[1];
 		FriendDao Fdao=FriendDao.getInstance();
-		List<UsersDto> list=Fdao.showFRlist(loginEamil, uploadFilePath);
+		List<UsersDto> list=Fdao.showFRlist(loginEamil);
 		System.out.println("FriendBirthdayCheck  list"+list);
 		if(list==null)return null;
 		String[] BirthdayFriend= new String[list.size()];	
@@ -157,7 +157,7 @@ public class AlarmDao {
 
 		return BirthdayFriend;
 	}
-	public void insertBirthdayAlarm(String num,String loginEamil, String uploadFilePath){
+	public void insertBirthdayAlarm(String num,String loginEamil){
 		String date="";
 		int count=0;
 		int counttmp=getAlarmCount(loginEamil);
@@ -177,14 +177,14 @@ public class AlarmDao {
 		UsersDto Udto=null;
 		if(num.equals("3")) {
 			System.out.println("BirthdatAlarm  loginEamil"+ loginEamil);
-			FRBDid=friendBirthdayCheck(loginEamil, uploadFilePath);
+			FRBDid=friendBirthdayCheck(loginEamil);
 			try {System.out.println(FRBDid);
 			if(FRBDid!=null) {
 			
 					conn=ConUtil.getConnection();
 
 					for(int i=0; i<FRBDid.length;i++) {
-						Udto=Udao.getUser(FRBDid[i], uploadFilePath); 
+						Udto=Udao.getUser(FRBDid[i]); 
 						sql="select REGDATE from ALARM where EMAIL=? and CONTENT=? and FRIENDEMAIL=?";
 						pstmt=conn.prepareStatement(sql);
 						pstmt.setString(1, loginEamil);
@@ -245,7 +245,7 @@ public class AlarmDao {
 		}
 	
 	//친구요청알람
-	public void insertFriendAlarm(String num,String AlarmId,String loginEamil, String uploadFilePath) {
+	public void insertFriendAlarm(String num,String AlarmId,String loginEamil) {
 		int count=0;
 		int counttmp=getAlarmCount(AlarmId);
 		if(counttmp==0) {
@@ -271,7 +271,7 @@ public class AlarmDao {
 				pstmt=conn.prepareStatement(sql);
 				pstmt.setString(1,AlarmId);
 				pstmt.setString(2,loginEamil);
-				UsersDto dto=Udao.getUser(loginEamil, uploadFilePath);
+				UsersDto dto=Udao.getUser(loginEamil);
 				pstmt.setString(3,dto.getName());
 				pstmt.setString(4, num);
 				pstmt.setString(5,curtuntTime());
@@ -388,14 +388,14 @@ public class AlarmDao {
 
 	}
 	//새글을 썻을때 친구들에게 알림을 넣어주는 기능!
-	public void insertNewTextAlarm(String loginEamil, String num, String uploadFilePath) {
+	public void insertNewTextAlarm(String loginEamil, String num) {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		FriendDao dao=FriendDao.getInstance();
-		List<UsersDto> frlist=dao.showFRlist(loginEamil, uploadFilePath);
+		List<UsersDto> frlist=dao.showFRlist(loginEamil);
 		UsersDao Udao=UsersDao.getInstance();
-		UsersDto dto=Udao.getUser(loginEamil, uploadFilePath);//접속사 유저
+		UsersDto dto=Udao.getUser(loginEamil);//접속사 유저
 	
 		for(UsersDto tmpdtp: frlist) {
 			

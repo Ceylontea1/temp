@@ -14,7 +14,6 @@ public class MyPageAction implements CommandAction {
 	public String requestPro(HttpServletRequest req, HttpServletResponse reps) throws Throwable {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session=req.getSession();
-		String uploadFilePath = req.getSession().getServletContext().getRealPath("/img");
 
 		if(session.getAttribute("loginUserEmail") == null) {
 			return "/jsp/main/join.jsp";
@@ -29,12 +28,12 @@ public class MyPageAction implements CommandAction {
 			loginUserEmail=(String) session.getAttribute("loginUserEmail");
 			if(loginUser==null) {
 				AlarmDao dao=AlarmDao.getInstance();
-				dao.insertBirthdayAlarm("3", loginUserEmail,uploadFilePath);
+				dao.insertBirthdayAlarm("3", loginUserEmail);
 			}
 		}
 		
 		 loginUserEmail = (String)session.getAttribute("loginUserEmail");
-		 loginUser=userDao.getUser(loginUserEmail, uploadFilePath);
+		 loginUser=userDao.getUser(loginUserEmail);
 		 AlarmDao Aldao=AlarmDao.getInstance();
 
 		req.setAttribute("alarmCount", Aldao.getAlarmCount(loginUserEmail));

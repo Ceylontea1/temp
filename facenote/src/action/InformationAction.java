@@ -13,7 +13,6 @@ public class InformationAction implements CommandAction {
 	public String requestPro(HttpServletRequest req, HttpServletResponse reps) throws Throwable {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session=req.getSession();
-		String uploadFilePath = req.getSession().getServletContext().getRealPath("/img");
 
 		if(session.getAttribute("loginUserEmail") == null) {
 			return "/jsp/main/join.jsp";
@@ -21,7 +20,7 @@ public class InformationAction implements CommandAction {
 		
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();
-		UsersDto loginUser = userDao.getUser(loginUserEmail, uploadFilePath);
+		UsersDto loginUser = userDao.getUser(loginUserEmail);
 		
 		AlarmDao Aldao=AlarmDao.getInstance();
 		

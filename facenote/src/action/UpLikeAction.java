@@ -20,11 +20,10 @@ public class UpLikeAction implements CommandAction{
 		request.setCharacterEncoding("UTF-8");
 		
 		HttpSession session=request.getSession();
-		String uploadFilePath = request.getSession().getServletContext().getRealPath("/img");
 
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();
-		UsersDto loginUser = userDao.getUser(loginUserEmail, uploadFilePath);	
+		UsersDto loginUser = userDao.getUser(loginUserEmail);	
 		
 		ContentsDao ConDao = ContentsDao.getInstance();
 		ContentsDto ConDto = null; 

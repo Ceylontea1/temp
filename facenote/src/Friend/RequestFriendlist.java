@@ -19,11 +19,10 @@ public class RequestFriendlist implements CommandAction {
 		// TODO Auto-generated method stub
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session=req.getSession();
-		String uploadFilePath = req.getSession().getServletContext().getRealPath("/img");
 
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();
-		UsersDto loginUser = userDao.getUser(loginUserEmail, uploadFilePath);
+		UsersDto loginUser = userDao.getUser(loginUserEmail);
 		String friendEmail = "";
 		
 		FriendDao Fdao=FriendDao.getInstance();
@@ -31,11 +30,11 @@ public class RequestFriendlist implements CommandAction {
 		List<UsersDto> list = null;
 		
 		if(req.getParameter("email") == null) {
-			list=Fdao.showFRlist(loginUser.getEmail(), uploadFilePath);
+			list=Fdao.showFRlist(loginUser.getEmail());
 		}
 		else {
 			friendEmail = req.getParameter("email");
-			list=Fdao.showFRlist(friendEmail, uploadFilePath);
+			list=Fdao.showFRlist(friendEmail);
 		}
 		int count=Fdao.FriendCount(loginUser.getEmail());
 		

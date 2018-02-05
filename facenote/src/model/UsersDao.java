@@ -51,7 +51,7 @@ public class UsersDao {
 		}
 	}
 
-	public UsersDto getUser(ResultSet rs, String uploadFilePath) {
+	public UsersDto getUser(ResultSet rs) {
 		UsersDto user = null;
 		try {
 			while(rs.next()) {
@@ -63,12 +63,12 @@ public class UsersDao {
 					user.setGender(rs.getString("GENDER"));
 					user.setBirth(rs.getString("BIRTH"));
 					user.setPhone(rs.getString("PHONE"));
-					if(this.isExists(rs.getString("IMAGEPATH"))) {
+//					if(this.isExists(rs.getString("IMAGEPATH"))) {
 						user.setimagepath(rs.getString("IMAGEPATH"));
-					}
-					else {
-						user.setimagepath("img/profileIMG/noneProfile.png");
-					}
+//					}
+//					else {
+//						user.setimagepath("/img/profileIMG/noneProfile.png");
+//					}
 					user.setRegdate(rs.getString("REGDATE"));
 			}
 		}
@@ -89,7 +89,7 @@ public class UsersDao {
 		return user;
 	}
 	
-	public UsersDto getUser(String loginEmail, String uploadFilePath) {
+	public UsersDto getUser(String loginEmail) {
 		UsersDto user = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -101,7 +101,7 @@ public class UsersDao {
 			pstmt.setString(1, loginEmail);
 			rs = pstmt.executeQuery();
 			
-			user = this.getUser(rs, uploadFilePath);
+			user = this.getUser(rs);
 		}
 		catch(Exception e) {
 			e.printStackTrace();

@@ -22,11 +22,10 @@ public class writeContentProAction implements CommandAction {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		HttpSession session=request.getSession();
-		String uploadFilePathTemp = request.getSession().getServletContext().getRealPath("/img");
 
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();
-		UsersDto loginUser = userDao.getUser(loginUserEmail, uploadFilePathTemp);	
+		UsersDto loginUser = userDao.getUser(loginUserEmail);	
 		
 		ContentsDto ConDto = new ContentsDto();
 		ContentsDao ConDao = ContentsDao.getInstance();
@@ -59,8 +58,11 @@ public class writeContentProAction implements CommandAction {
 			
 			File ContentImage = new File(uploadFilePath + "\\" + fileName);
 			ContentImage.getPath();
-			ImagePath = ContentImage.getPath().replaceAll("c:\\\\", "/");
-
+			ImagePath = ContentImage.getPath().replaceAll("c:\\\\", "/img");
+			System.out.println("ImagePath = " + ImagePath);
+//			System.out.println("image split" + ImagePath.split("img")[1]);
+			ImagePath = "img" + ImagePath.split("img")[1];
+			System.out.println("new image path : " + ImagePath);
 		}
 			
 		ConDto.setEmail(pageUserEmail);

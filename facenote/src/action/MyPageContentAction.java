@@ -16,19 +16,17 @@ public class MyPageContentAction implements CommandAction {
 	public String requestPro(HttpServletRequest req, HttpServletResponse reps) throws Throwable {		
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session=req.getSession();
-		String uploadFilePath = req.getSession().getServletContext().getRealPath("/img");
-
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();
-		UsersDto loginUser = userDao.getUser(loginUserEmail, uploadFilePath);
+		UsersDto loginUser = userDao.getUser(loginUserEmail);
 		
 		ContentsDao contentsDao = ContentsDao.getInstance();
 		List<ContentsDto> contents = null;
 		List<String> writers = null;
 		List<String> contentLocations = null;
 
-		contents = contentsDao.getContentbyEmail(loginUserEmail, uploadFilePath);
-		loginUser = userDao.getUser(loginUserEmail, uploadFilePath);
+		contents = contentsDao.getContentbyEmail(loginUserEmail);
+		loginUser = userDao.getUser(loginUserEmail);
 		writers = userDao.getWriters(contents);
 		contentLocations = userDao.getUsers(contents);
 		

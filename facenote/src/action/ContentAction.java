@@ -12,7 +12,6 @@ public class ContentAction implements CommandAction{
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		request.setCharacterEncoding("UTF-8");
-		String uploadFilePath = request.getSession().getServletContext().getRealPath("/img");
 
 		String contentid = request.getParameter("contentid");
 		
@@ -35,9 +34,9 @@ public class ContentAction implements CommandAction{
 		
 		ConDto  = ConDao.getContentbyNum(contentid);
 		
-		writer = UDao.getUser(ConDto.getWriter(), uploadFilePath);
+		writer = UDao.getUser(ConDto.getWriter());
 		
-		hostemail = UDao.getUser(ConDto.getEmail(), uploadFilePath);
+		hostemail = UDao.getUser(ConDto.getEmail());
 		
 		List<ReplyDto> ReDtoList = null;
 		

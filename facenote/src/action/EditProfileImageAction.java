@@ -35,27 +35,34 @@ public class EditProfileImageAction implements CommandAction {
 			uploadDir.mkdir();
 		}
 		
+		File originalProfileImage = new File(uploadDir + "\\" + newEmail);
+		if(originalProfileImage.exists()) {
+			originalProfileImage.delete();
+		}
+		
 		MultipartRequest multi = new MultipartRequest(req,
-			 uploadFilePath,
+			 uploadFilePath + "\\profileIMG\\",
 			 uploadFileSizeLimit,
 			 encType,new DefaultFileRenamePolicy());
 		
 		String fileName = multi.getFilesystemName("newProfileImage");
 		File oldProfileImage = new File(uploadDir + "\\" + fileName);	// 새 업로드
-		
+	
 		Path source = Paths.get(uploadDir + fileName);
+//		Path source = Paths.get(uploadDir +  newEmail + ".png");
 		String fileType = Files.probeContentType(source).split("/")[1];
-		
+//		File oldProfileImage = new File(uploadDir + "\\" + newEmail + fileType);	// 새 업로드
+
 		File newProfileImage = new File(uploadDir + "\\" + newEmail + ".png"); // 메일 주소로 업로드
 		if(newProfileImage != null) {
 			newProfileImage.delete();
 		}
 		
 		newProfileImage = new File(uploadDir + "\\" + newEmail + ".png");
-		
+		System.out.println("new file path : " + newProfileImage.getPath());
 		System.out.println("uploadDir : " + uploadDir);
-		System.out.println("oldPI : " + uploadDir + fileName);
-		System.out.println("new File path : " + uploadDir + newEmail + "." + fileType);
+//		System.out.println("oldPI : " + uploadDir + "\\" + fileName);
+		System.out.println("new File path : " + uploadDir + "\\" + newEmail + ".png");
 		oldProfileImage.renameTo(newProfileImage);
 		
 		return "/jsp/page/closepage.jsp";

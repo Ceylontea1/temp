@@ -16,7 +16,6 @@ public class FriendPageContentAction implements CommandAction {
 	public String requestPro(HttpServletRequest req, HttpServletResponse reps) throws Throwable {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session=req.getSession();
-		String uploadFilePath = req.getSession().getServletContext().getRealPath("/img");
 
 		if(session.getAttribute("loginUserEmail") == null) {
 			return "/jsp/main/join.jsp";
@@ -24,15 +23,15 @@ public class FriendPageContentAction implements CommandAction {
 		
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();
-		UsersDto loginUser = userDao.getUser(loginUserEmail, uploadFilePath);
+		UsersDto loginUser = userDao.getUser(loginUserEmail);
 		
 		ContentsDao contentsDao = ContentsDao.getInstance();
 		List<ContentsDto> contents = null;
 		List<String> writers = null;
 		List<String> contentLocations = null;
 						
-		contents = contentsDao.getContentbyEmail(req.getParameter("friendmail"), uploadFilePath);
-		loginUser = userDao.getUser(loginUserEmail, uploadFilePath);
+		contents = contentsDao.getContentbyEmail(req.getParameter("friendmail"));
+		loginUser = userDao.getUser(loginUserEmail);
 		writers = userDao.getUsers(contents);
 		contentLocations = userDao.getUsers(contents);
 		
