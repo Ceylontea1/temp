@@ -14,18 +14,14 @@
 
 <script type="text/javascript">
 
-
-/* $(document).ready(function () { 
-	// 페이지 document 로딩 완료 후 스크립트 실행 
-	$("#imagesection").click(function () { 
-		status = $("#hidden").css("display"); 
-		if (status == "none") { 
-			$("#hidden").css("display", ""); 
-		} else { 
-			$("#hidden").css("display", "none"); 
-		} 
-	}); 
-}); */
+function modify(){
+	
+	var frm = document.getElementById("frm");
+	var contentid = document.getElementById("contentid").value;
+	frm.action = "${pageContext.request.contextPath}/FaceNote/updateContent.do?contentid=" + contentid;
+	frm.method = "post";
+	frm.submit();	
+}
 
 function uplike(){
 	var frm = document.getElementById("frm");
@@ -98,7 +94,7 @@ function writercomment(){
 					<tr>
 						<td colspan="2">
 						<c:if test="${ConDto.writer eq loginemail or ConDto.email eq loginemail }">
-								<input type="button" name="mod" value="수정" onClick="#">&nbsp;&nbsp;
+								<input type="button" name="mod" value="수정" onClick="modify()">&nbsp;&nbsp;
 								<input type="button" name="del" value="삭제" onClick="#">&nbsp;&nbsp;
 						</c:if>
 								<input type="button" name="close" value="닫기" onClick="javascript:self.close();">

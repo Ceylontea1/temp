@@ -34,11 +34,7 @@ function readURL(input) {
 
 function doDisplayImage(){
     var con = document.getElementById("imagesection");
-/*     if(con.style.display=='none'){ */
         con.style.display = 'block';
-/*     }else{
-        con.style.display = 'none';
-    } */
 }
 $(function() {
     $("#reservationCheck").on('change', function(){
@@ -49,10 +45,8 @@ function doDisplayReservationsection(){
 	var section = document.getElementById("reservationsection");
 	var check = document.getElementById("reservationCheck");
 	if(check.checked){
-		alert ( check.checked );
 		section.style.display = 'block';
 	}else{
-		alert ( check.checked );
 		section.style.dispaly = 'none';
 	}
 }

@@ -20,6 +20,7 @@
 				<div style="cursor: pointer;" onclick="window.open('<c:url value = "/FaceNote/content.do?contentid=${ content.contentnum }" />','창이름','width=800,height=700','menubars=no, scrollbars=auto')">
 					content : ${ content.content }<br>
 					<c:if test = "${ content.imagepath ne null }">
+						${pageContext.request.contextPath}/${ content.imagepath }
 						<img src = "${pageContext.request.contextPath}/${ content.imagepath }" width = "100" height = "100">
 					</c:if>
 					<br>
