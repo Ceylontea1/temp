@@ -1,0 +1,7 @@
+diff a/facenote/build/classes/.gitignore b/facenote/build/classes/.gitignore	(rejected hunks)
+@@ -1,5 +1,3 @@
+ /Friend/
+ /action/
+-/alarm/
+-/controller/
+ /model/
