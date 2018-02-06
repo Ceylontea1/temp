@@ -412,4 +412,30 @@ public class UsersDao {
 		}
 		return userPassword;
 	}
+
+	public int userRemove(String userEmail, String userPassword) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		if(this.login(userEmail, userPassword) == 1) {
+			String sql = "delete from USERS where EMAIL = ?";
+			
+			try {
+				con = ConUtil.getConnection();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, userEmail);
+				rs = pstmt.executeQuery();
+				
+				return 1;
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				this.closeConnection(con, pstmt, rs);
+			}
+		}
+		return 0;
+	}
 }

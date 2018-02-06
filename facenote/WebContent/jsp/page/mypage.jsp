@@ -41,9 +41,9 @@
 	</tr>
 </table>
 
-	<iframe src = "${pageContext.request.contextPath}/mypagecontent.do?loginEmail=${ loginUser.email }" width = "80%" height = "500" frameborder = "0">
+ 	<iframe src = "${pageContext.request.contextPath}/mypagecontent.do?loginEmail=${ loginUser.email }" width = "80%" height = "500" frameborder = "0">
 	
-	</iframe>
+ 	</iframe>
 	</div>
 
 </body>

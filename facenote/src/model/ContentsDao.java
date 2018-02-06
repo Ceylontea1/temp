@@ -375,4 +375,24 @@ public class ContentsDao {
 		return time;
 	}
 	
+	public void deleteContent(String contentnum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "delete from CONTENTS where CONTENTNUM = ?";
+		
+		try {
+			con = ConUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, contentnum);
+			pstmt.executeQuery();
+		}
+		catch(Exception e) {
+			
+		}
+		finally {
+			this.closeConnection(con, pstmt, rs);
+		}
+	}
+	
 }

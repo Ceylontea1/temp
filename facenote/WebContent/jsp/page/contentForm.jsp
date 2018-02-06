@@ -23,6 +23,15 @@ function modify(){
 	frm.submit();	
 }
 
+function deleteContent(){
+	
+	var frm = document.getElementById("frm");
+	var contentid = frm.contentid.value;
+	frm.action = "${pageContext.request.contextPath}/deletecontent.do?contentid=" + contentid;
+	frm.method = "post";
+	frm.submit();	
+}
+
 function uplike(){
 	var frm = document.getElementById("frm");
 
@@ -95,7 +104,7 @@ function writercomment(){
 						<td colspan="2">
 						<c:if test="${ConDto.writer eq HostEmail.email or ConDto.email eq HostEmail.email }">
 								<input type="button" name="mod" value="수정" onClick="modify()">&nbsp;&nbsp;
-								<input type="button" name="del" value="삭제" onClick="#">&nbsp;&nbsp;
+								<input type="button" name="del" value="삭제" onClick="deleteContent()">&nbsp;&nbsp;
 						</c:if>
 								<input type="button" name="close" value="닫기" onClick="javascript:self.close();">
 								ConDto.writer = ${ ConDto.writer }, Hostemail = ${ HostEmail.email }, ConDto.email = ${ ConDto.email }
