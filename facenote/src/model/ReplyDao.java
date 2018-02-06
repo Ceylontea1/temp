@@ -160,7 +160,7 @@ public class ReplyDao {
 		return comments;
 	}
 
-	public ReplyDto getReply(String contentid) {
+	public ReplyDto getReply(String replyid) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -168,8 +168,8 @@ public class ReplyDao {
 
 		try {
 			conn = ConUtil.getConnection();
-			pstmt = conn.prepareStatement("select * from REPLY where CONTENTNUM = ? ORDER BY REGDATE DESC ");
-			pstmt.setString(1, contentid);
+			pstmt = conn.prepareStatement("select * from REPLY where REPLYID = ?");
+			pstmt.setString(1, replyid);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				Reply = new ReplyDto();

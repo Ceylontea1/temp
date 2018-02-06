@@ -325,15 +325,8 @@ public class ContentsDao {
 		try {
 				conn = ConUtil.getConnection();
 				
-//				pstmt = conn.prepareStatement("select count(*)from CONTENTS where EMAIL = ?");
-//				pstmt.setString(1, ConDto.getEmail());
-//				rs = pstmt.executeQuery();
-//				if(rs.next())
-//				ConDto.setContentid(ConDto.getEmail() + "_" + String.valueOf(rs.getInt(1)));
-//				pstmt.close();
 				pstmt = conn.prepareStatement("insert into CONTENTS(EMAIL, WRITER, CONTENTNUM, CONTENT, IMAGEPATH, SCOPE, REGDATE, GOOD) values(?,?,?,?,?,?,?,?)");
 				
-				//EMAIL, WRITER, CONTENTID, CONTENT, IMAGEPATH, SCOPE
 				pstmt.setString(1, ConDto.getEmail());
 				pstmt.setString(2, ConDto.getWriter());
 				pstmt.setString(3, ConDto.getContentnum());
@@ -372,49 +365,6 @@ public class ContentsDao {
 			}
 		}
 	}
-	
-/*	public int getCount(String email) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		ContentsDto article = null;
-		int count = 0;
-		try {
-				conn = ConUtil.getConnection();
-				
-				pstmt = conn.prepareStatement("select count(*)from CONTENTS where EMAIL = ?");
-				pstmt.setString(1, email);
-				rs = pstmt.executeQuery();
-				if(rs.next()) {
-					count = rs.getInt(1);
-				}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if(rs != null) { 
-				try {
-					rs.close();
-				}catch(SQLException e) {
-					
-				}
-			}
-			if(pstmt != null) { 
-				try {
-					pstmt.close();
-				}catch(SQLException e) {
-					
-				}
-			}
-			if(conn != null) { 
-				try {
-					conn.close();
-				}catch(SQLException e) {
-					
-				}
-			}
-		}
-		return count;
-	}*/
 	
 	public String getDate() {
 		String time="";
