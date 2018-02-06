@@ -12,6 +12,7 @@ public class ContentAction implements CommandAction{
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		request.setCharacterEncoding("UTF-8");
+
 		String contentid = request.getParameter("contentid");
 		
 		System.out.println(contentid);

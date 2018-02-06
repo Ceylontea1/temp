@@ -20,6 +20,7 @@ public class UpLikeAction implements CommandAction{
 		request.setCharacterEncoding("UTF-8");
 		
 		HttpSession session=request.getSession();
+
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();
 		UsersDto loginUser = userDao.getUser(loginUserEmail);	

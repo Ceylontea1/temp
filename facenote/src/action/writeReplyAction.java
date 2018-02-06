@@ -14,6 +14,7 @@ public class writeReplyAction implements CommandAction{
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		HttpSession session=request.getSession();
+
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();
 		UsersDto loginUser = userDao.getUser(loginUserEmail);		

@@ -15,6 +15,7 @@ public class SearchFriendinit implements CommandAction{
 	public String requestPro(HttpServletRequest req, HttpServletResponse reps) throws Throwable {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session=req.getSession();
+
 		String loginUserEmail = (String)session.getAttribute("loginUserEmail");
 		UsersDao userDao = UsersDao.getInstance();
 		UsersDto loginUser = userDao.getUser(loginUserEmail);

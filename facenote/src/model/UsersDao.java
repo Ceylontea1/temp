@@ -53,7 +53,6 @@ public class UsersDao {
 
 	public UsersDto getUser(ResultSet rs) {
 		UsersDto user = null;
-		
 		try {
 			while(rs.next()) {
 					user = new UsersDto();
@@ -64,12 +63,12 @@ public class UsersDao {
 					user.setGender(rs.getString("GENDER"));
 					user.setBirth(rs.getString("BIRTH"));
 					user.setPhone(rs.getString("PHONE"));
-					if(this.isExists(rs.getString("IMAGEPATH"))) {
+//					if(this.isExists(rs.getString("IMAGEPATH"))) {
 						user.setimagepath(rs.getString("IMAGEPATH"));
-					}
-					else {
-						user.setimagepath("/img/profileIMG/noneProfile.png");
-					}
+//					}
+//					else {
+//						user.setimagepath("/img/profileIMG/noneProfile.png");
+//					}
 					user.setRegdate(rs.getString("REGDATE"));
 			}
 		}
