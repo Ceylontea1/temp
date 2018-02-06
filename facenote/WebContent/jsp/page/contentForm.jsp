@@ -17,7 +17,7 @@
 function modify(){
 	
 	var frm = document.getElementById("frm");
-	var contentid = document.getElementById("contentid").value;
+	var contentid = frm.contentid.value;
 	frm.action = "${pageContext.request.contextPath}/FaceNote/updateContent.do?contentid=" + contentid;
 	frm.method = "post";
 	frm.submit();	
@@ -45,7 +45,7 @@ function writercomment(){
 </head>
 <body>
 	<div align="center">
-		<form id="frm">
+		<form id="frm" method="post" enctype="multipart/form-data">
 			<c:if test="${empty ConDto}">
 				<h1>표시할 내용이 없습니다.</h1>
 				<!-- <a href="javascript:history.go(-1);">이전페이지로</a> -->
@@ -93,11 +93,12 @@ function writercomment(){
 					</tr>
 					<tr>
 						<td colspan="2">
-						<c:if test="${ConDto.writer eq loginemail or ConDto.email eq loginemail }">
+						<c:if test="${ConDto.writer eq HostEmail.email or ConDto.email eq HostEmail.email }">
 								<input type="button" name="mod" value="수정" onClick="modify()">&nbsp;&nbsp;
 								<input type="button" name="del" value="삭제" onClick="#">&nbsp;&nbsp;
 						</c:if>
 								<input type="button" name="close" value="닫기" onClick="javascript:self.close();">
+								ConDto.writer = ${ ConDto.writer }, Hostemail = ${ HostEmail.email }, ConDto.email = ${ ConDto.email }
 						</td>
 					</tr>
 				</table>

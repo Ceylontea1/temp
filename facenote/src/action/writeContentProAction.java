@@ -59,10 +59,7 @@ public class writeContentProAction implements CommandAction {
 			File ContentImage = new File(uploadFilePath + "\\" + fileName);
 			ContentImage.getPath();
 			ImagePath = ContentImage.getPath().replaceAll("c:\\\\", "/img");
-			System.out.println("ImagePath = " + ImagePath);
-//			System.out.println("image split" + ImagePath.split("img")[1]);
 			ImagePath = "img" + ImagePath.split("img")[1];
-			System.out.println("new image path : " + ImagePath);
 		}
 			
 		ConDto.setEmail(pageUserEmail);

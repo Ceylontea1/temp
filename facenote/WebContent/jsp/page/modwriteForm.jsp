@@ -75,7 +75,7 @@ function checkvalue() {
 	<div style="align: center;">
 	<h1>게시물 수정</h1>
 		<form name="frm1" action="${pageContext.request.contextPath}/FaceNote/updateContentpro.do" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="contentid" value="${ConDto.contentid }">
+			<input type="hidden" name="contentid" value="${ConDto.contentnum }">
 			<table border="1" style="text-align: center;">
 				<tr>
 					<td><img src="#">&nbsp;&nbsp;작성자 : ${ConDto.writer}</td>
@@ -84,7 +84,7 @@ function checkvalue() {
 				<c:if test="${ConDto.imagepath ne 'null'}">
 					<tr>
 						<td colspan="3" align="center">
-							<img id="image" src="${ConDto.imagepath}" alt="your image" />그림 경로 >> ${ConDto.imagepath}
+							<img id="image" src="${pageContext.request.contextPath}/${ConDto.imagepath}" alt="your image" />그림 경로 >> ${ConDto.imagepath}
 						</td>
 					</tr>
 				</c:if>
