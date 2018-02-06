@@ -80,7 +80,7 @@ function checkvalue() {
 			<table border="1" style="text-align: center;">
 				<tr>
 					<td><img src="#">&nbsp;&nbsp;작성자 : ${ConDto.writer}</td>
-					<td><input type="file" id="imgInp" value="사진 업로드" ></td>
+					<td><input type="file" id="imgInp" value="사진 업로드" name="imagepath"></td>
 				</tr>
 				<c:if test="${ConDto.imagepath ne 'null'}">
 					<tr>

@@ -52,7 +52,11 @@ public class updateContentProAction implements CommandAction{
 		MultipartRequest multi = new MultipartRequest(request, uploadFilePath, uploadFileSizeLimit, encType,
 				new DefaultFileRenamePolicy());
 		String ImagePath = "";
+		
+		ConDto = ConDao.getContentbyNum(contentId);
+		
 		String fileName = multi.getFilesystemName("imagepath");
+		System.out.println("updateContentProAction fileName : " + fileName);
 		if(fileName != null) {
 			Path source = Paths.get(uploadFilePath + fileName);
 			
@@ -61,14 +65,14 @@ public class updateContentProAction implements CommandAction{
 			ImagePath = ContentImage.getPath().replaceAll("c:\\\\", "/img");
 			ImagePath = "img" + ImagePath.split("img")[1];
 		}
-			
+		else {
+			ImagePath = ConDto.getImagepath();
+		}
 		ConDto.setEmail(pageUserEmail);
 		ConDto.setWriter(loginUserEmail);
 		ConDto.setContentnum(contentId);
 		ConDto.setContent(multi.getParameter("content"));
-		if(fileName != null) {
-			ConDto.setImagepath(ImagePath);
-		}
+		ConDto.setImagepath(ImagePath);
 		
 		System.out.println("updateContentProAction : contentid >>>> " + contentId);
 		ConDto.setContentnum(contentId);
