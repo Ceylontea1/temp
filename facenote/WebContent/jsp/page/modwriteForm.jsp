@@ -74,8 +74,9 @@ function checkvalue() {
 <body>
 	<div style="align: center;">
 	<h1>게시물 수정</h1>
-		<form name="frm1" action="${pageContext.request.contextPath}/FaceNote/updateContentpro.do" method="post" enctype="multipart/form-data">
+		<form name="frm1" action="${pageContext.request.contextPath}/FaceNote/updateContentPro.do?pageemail=${ ConDto.email }&contentid=${ConDto.contentnum}" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="contentid" value="${ConDto.contentnum }">
+			<input type="hidden" name="good" value="${ConDto.good}">
 			<table border="1" style="text-align: center;">
 				<tr>
 					<td><img src="#">&nbsp;&nbsp;작성자 : ${ConDto.writer}</td>
